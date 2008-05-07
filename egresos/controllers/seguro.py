@@ -48,7 +48,7 @@ class Beneficiario(controllers.Controller):
 		beneficiario.seguro = seguro
 		beneficiario.flush()
 		
-		return redirect(tg.url('/seguro/%s' % seguro.id))
+		raise redirect(tg.url('/seguro/%s' % seguro.id))
 	
 	@error_handler(index)
 	@expose()
@@ -60,7 +60,7 @@ class Beneficiario(controllers.Controller):
 		beneficiario.delete()
 		flash('Se ha eliminado el beneficiario')
 		
-		return redirect(tg.url('/seguro/%s' % seguro.id))
+		raise redirect(tg.url('/seguro/%s' % seguro.id))
 
 class Seguro(controllers.Controller):
 	
@@ -75,7 +75,7 @@ class Seguro(controllers.Controller):
 		return dict(tg_errors=tg_errors)
 	
 	@error_handler(index)
-	@expose(template="seguro.templates.seguro.seguro")
+	@expose(template="egresos.templates.seguro.seguro")
 	@validate(validators=dict(seguro=validators.Int()))
 	def default(self, seguro):
 		
@@ -90,8 +90,8 @@ class Seguro(controllers.Controller):
 	@error_handler(index)
 	@expose()
 	@validate(validators=dict(afiliado=validators.Int(),
-							fecha=validators.DateTimeConverter(format='%d/%m/%Y')),
-							fallecimiento=validators.DateTimeConverter(format='%d/%m/%Y'))
+							fecha=validators.DateTimeConverter(format='%d/%m/%Y'),
+							fallecimiento=validators.DateTimeConverter(format='%d/%m/%Y')))
 	def agregar(self, afiliado, **kw):
 		
 		afiliado = model.Afiliado.get(afiliado)
@@ -100,22 +100,22 @@ class Seguro(controllers.Controller):
 		seguro.afiliado = afiliado
 		seguro.flush()
 		
-		flash('Se ha agregado el Auxilio al afiliado %s' % afiliado.id)
+		flash('Se ha agregado el Seguro de Vida al afiliado %s' % afiliado.id)
 		
 		return self.default(seguro.id)
 	
 	@error_handler(index)
 	@expose()
 	@validate(validators=dict(auxilio=validators.Int()))
-	def eliminar(self, auxilio):
+	def eliminar(self, seguro):
 		
 		seguro = model.Seguro.get(seguro)
 		afiliado = seguro.afiliado
 		auxilio.delete()
 		
-		flash('Se ha eliminado el auxilio al afiliado %s' % afiliado.id)
+		flash('Se ha eliminado el Seguro de Vida al afiliado %s' % afiliado.id)
 		
-		return redirect(tg.url('/'))
+		raise redirect(tg.url('/'))
 	
 	@error_handler(index)
 	@expose(template="egresos.templates.seguro.reporte")
@@ -123,4 +123,6 @@ class Seguro(controllers.Controller):
 							fin=validators.DateTimeConverter(format='%d/%m/%Y')))
 	def reporte(self, inicio, fin):
 		
-		return dict(seguros=model.Seguro.query.filter(fecha>=inicio,fecha<=fin), inicio=inicio, fin=fin)
+		seguros = model.Seguro.query.all()
+		
+		return dict(seguros=[s for s in seguros if s.fecha >= inicio or s.fecha >= fin], inicio=inicio, fin=fin)

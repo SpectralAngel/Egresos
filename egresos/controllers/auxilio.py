@@ -64,7 +64,7 @@ class Auxilio(controllers.Controller):
 		
 		flash('Se ha agregado el Auxilio al afiliado %s' % afiliado.id)
 		
-		return redirect(tg.url('/'))
+		raise redirect(tg.url('/'))
 	
 	@error_handler(index)
 	@expose()
@@ -77,7 +77,7 @@ class Auxilio(controllers.Controller):
 		
 		flash('Se ha eliminado el auxilio al afiliado %s' % afiliado.id)
 		
-		return redirect(tg.url('/'))
+		raise redirect(tg.url('/'))
 	
 	@error_handler(index)
 	@expose(template="egresos.templates.auxilio.reporte")
@@ -85,4 +85,6 @@ class Auxilio(controllers.Controller):
 							fin=validators.DateTimeConverter(format='%d/%m/%Y')))
 	def reporte(self, inicio, fin):
 		
-		return dict(auxilios=model.Auxilio.query.filter(fecha>=inicio,fecha<=fin), inicio=inicio, fin=fin)
+		auxilios = model.Auxilio.query.all()
+		
+		return dict(auxilios=[s for s in auxilios if s.fecha >= inicio or s.fecha >= fin], inicio=inicio, fin=fin)

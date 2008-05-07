@@ -18,22 +18,25 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 import turbogears as tg
-from turbogears import controllers, expose, flash
+from turbogears 	import controllers, flash, validators
+from turbogears		import expose, paginate, validate, error_handler
 # from egresos import model
-from turbogears import identity, redirect
-from cherrypy   import request, response
-from beneficio  import Beneficio
-from seguro 	import Seguro
-from auxilio	import Auxilio
-from funebre	import Funebre
-from devolucion import Devolucion
+from turbogears 	import identity, redirect
+from cherrypy   	import request, response
+from egresos		import breadcrumbs
+from egresos		import model
+from sobrevivencia  import Sobrevivencia
+from seguro 		import Seguro
+from auxilio		import Auxilio
+from funebre		import Funebre
+from devolucion 	import Devolucion
 # from egresos import json
 # import logging
 # log = logging.getLogger("egresos.controllers")
 
 class Root(controllers.RootController):
 	
-	beneficio = Beneficio()
+	sobrevivencia = Sobrevivencia()
 	seguro = Seguro()
 	auxilio = Auxilio()
 	devolucion = Devolucion()
@@ -43,9 +46,14 @@ class Root(controllers.RootController):
 	# @identity.require(identity.in_group("admin"))
 	def index(self):
 		import time
-		# log.debug("Happy TurboGears Controller Responding For Duty")
-		flash("Your application is now running")
 		return dict(now=time.ctime())
+	
+	@error_handler(index)
+	@expose(template="egresos.templates.afiliado")
+	@validate(validators=dict(afiliado=validators.Int()))
+	def afiliado(self, afiliado):
+		
+		return dict(afiliado=model.Afiliado.get(afiliado))
 
 	@expose(template="egresos.templates.login")
 	def login(self, forward_url=None, previous_url=None, *args, **kw):

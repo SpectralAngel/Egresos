@@ -32,15 +32,15 @@
 			<tbody>
 				<tr py:for="funebre in funebres">
 					<td py:content="funebre.afiliado.id" />
-					<td py:content="funebre.afiliado.nombre, seguro.afiliado.apellido" />
-					<td py:content="funebre.fecha.strftime(%d/%m/%Y)" />
+					<td py:content="funebre.afiliado.nombre, ' ',  funebre.afiliado.apellidos" />
+					<td py:content="funebre.fecha.strftime('%d/%m/%Y')" />
 					<td py:content="funebre.cheque" />
 					<td py:content="locale.currency(funebre.monto, True, True)" />
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
-					<th colspan="4">Total Pagado</td>
+					<th colspan="4">Total Pagado</th>
 					<th py:content="locale.currency(sum(funebre.monto for funebre in funebres), True, True)" />
 				</tr>
 			</tfoot>

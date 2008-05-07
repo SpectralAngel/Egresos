@@ -64,7 +64,7 @@ class Funebre(controllers.Controller):
 		
 		flash('Se ha agregado la Ayuda Funebre al afiliado %s' % afiliado.id)
 		
-		return redirect(tg.url('/'))
+		raise redirect(tg.url('/'))
 	
 	@error_handler(index)
 	@expose()
@@ -77,7 +77,7 @@ class Funebre(controllers.Controller):
 		
 		flash('Se ha eliminado la Ayuda Funebre al afiliado %s' % afiliado.id)
 		
-		return redirect(tg.url('/'))
+		raise redirect(tg.url('/'))
 	
 	@error_handler(index)
 	@expose(template="egresos.templates.funebre.reporte")
@@ -85,4 +85,6 @@ class Funebre(controllers.Controller):
 							fin=validators.DateTimeConverter(format='%d/%m/%Y')))
 	def reporte(self, inicio, fin):
 		
-		return dict(funebres=model.Funebre.query.filter(fecha>=inicio,fecha<=fin), inicio=inicio, fin=fin)
+		funebres = model.Funebre.query.all()
+		
+		return dict(funebres=[s for s in funebres if s.fecha >= inicio or s.fecha >= fin], inicio=inicio, fin=fin)

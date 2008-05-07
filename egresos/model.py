@@ -45,7 +45,9 @@ class Afiliado(Entity):
 	cotizacion = Field(String(20), colname='payment')
 	auxilios = OneToMany("Auxilio")
 	sobrevivencias = OneToMany("Sobrevivencia")
-	Funebre = OneToMany("Funebre")
+	funebres = OneToMany("Funebre")
+	devoluciones = OneToMany("Devolucion")
+	seguros = OneToMany("Seguro")
 
 class Auxilio(Entity):
 	
@@ -99,6 +101,8 @@ class Beneficiario(Entity):
 	cheque = Field(String(20), required=True)
 
 class Devolucion(Entity):
+	
+	using_options(tablename='devolucion')
 	
 	afiliado = ManyToOne("Afiliado")
 	concepto = Field(Text)

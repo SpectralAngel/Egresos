@@ -64,7 +64,7 @@ class Devolucion(controllers.Controller):
 		
 		flash('Se ha agregado la Devolción al afiliado %s' % afiliado.id)
 		
-		return redirect(tg.url('/'))
+		raise redirect(tg.url('/'))
 	
 	@error_handler(index)
 	@expose()
@@ -77,7 +77,7 @@ class Devolucion(controllers.Controller):
 		
 		flash('Se ha eliminado el devolución al afiliado %s' % afiliado.id)
 		
-		return redirect(tg.url('/'))
+		raise redirect(tg.url('/'))
 	
 	@error_handler(index)
 	@expose(template="egresos.templates.devolucion.reporte")
@@ -85,4 +85,6 @@ class Devolucion(controllers.Controller):
 							fin=validators.DateTimeConverter(format='%d/%m/%Y')))
 	def reporte(self, inicio, fin):
 		
-		return dict(devoluciones=model.Devolucion.query.filter(fecha>=inicio,fecha<=fin), inicio=inicio, fin=fin)
+		devoluciones = model.Devolucion.query.all()
+		
+		return dict(devoluciones=[s for s in devoluciones if s.fecha >= inicio or s.fecha >= fin], inicio=inicio, fin=fin)

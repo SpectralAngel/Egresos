@@ -20,7 +20,7 @@
 	<script type="text/javascript">
 	$(document).ready(function()
 	{
-		$('.dia').attachDatepicker();
+		$('.fecha').attachDatepicker();
 	});
 	</script>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type"
@@ -33,20 +33,15 @@
 
 <body py:match="body" py:attrs="select('@*')">
 	<div id="header">
-		<h1>Gestor de Ingresos</h1>
-		<h2>Caja</h2>
+		<h1>Gestor de Egresos</h1>
 		<div id="navegacion">
-			<a href="${tg.url('/recibo')}">Recibos</a> |
-			<a href="${tg.url('/casa')}">Casas</a> |
-			<a href="${tg.url('/reporte')}">Reportes</a> |
-			<a href="${tg.url('/organizacion')}">Organizaciones</a> |
-			<a href="${tg.url('/producto')}">Productos</a>
+			<a href="${tg.url('/')}">Inicio</a> |
 			<span py:if="tg.identity.anonymous">| <a href="${tg.url('/login')}">Iniciar Sesi&oacute;n</a></span>
 			<span py:if="not tg.identity.anonymous">| Bienvenido ${tg.identity.user.display_name}. <a href="${tg.url('/logout')}">Cerrar Sesi&oacute;n</a></span>
 		</div>
-		<form action="${tg.url('/recibo/mostrar')}" id="busqueda">
+		<form action="${tg.url('/afiliado')}" id="busqueda">
 			<div>
-				<input name="recibo" /><input type="submit" value="Buscar" />
+				<input name="afiliado" /><input type="submit" value="Buscar" />
 			</div>
 		</form>
 	</div>
