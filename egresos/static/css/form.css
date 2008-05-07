@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+
+form fieldset
+{
+	margin-bottom: 10px;
+}
+form legend
+{
+	padding: 0 2px;
+	font-weight: bold;
+}
+form label
+{
+	display: inline-block;
+	float: left;
+	line-height: 1.8;
+	vertical-align: top;
+	width: 120px;
+}
+form fieldset ol
+{
+	margin: 0;
+	padding: 0;
+}
+form fieldset li
+{
+	clear: left;
+	list-style: none;
+	padding: 5px;
+	margin: 0;
+}

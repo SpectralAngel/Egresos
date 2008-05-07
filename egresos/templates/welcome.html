@@ -19,6 +19,8 @@
 			<li><a href="#sobrevivencia">Beneficio de Sobrevivencia</a></li>
 			<li><a href="#seguro">Seguro de Vida</a></li>
 			<li><a href="#auxilio">Auxilio</a></li>
+			<li><a href="#devolucion">Devolucion</a></li>
+			<li><a href="#funebre">Fuenbre</a></li>
 		</u>
 		<div id="sobrevivencia">
 			<h1>Beneficios de Sobrevivencia</h1>
@@ -117,6 +119,10 @@
 							<input name="fecha" class="fecha" />
 						</li>
 						<li>
+							<label for="cobrador">Cobrador:</label>
+							<input name="cobrador" />
+						</li>
+						<li>
 							<label for="monto">Monto:</label>
 							<input name="monto" />
 						</li>
@@ -129,6 +135,53 @@
 				</fieldset>
 			</form>
 			<form action="auxilio/reporte">
+				<fieldset>
+					<legend>Mostrar Reporte</legend>
+					<ol>
+						<li>
+							<label for="inicio">Fecha de Inicio</label>
+							<input name="inicio" class="fecha" />
+						</li>
+						<li>
+							<label for="final">Fecha de Cierre</label>
+							<input name="final" class="fecha" />
+						</li>
+						<li><input value="Mostrar" type="submit" /></li>
+					</ol>
+				</fieldset>
+			</form>
+		</div>
+		<div id="devolucion">
+			<h1>Devolciones</h1>
+			<form action="devolucion/agregar">
+				<fieldset>
+					<legend>Agregar</legend>
+					<ol>
+						<li>
+							<label for="afiliado">Afiliaci&oacute;n:</label>
+							<input name="afiliado" />
+						</li>
+						<li>
+							<label for="fecha">Fecha:</label>
+							<input name="fecha" class="fecha" />
+						</li>
+						<li>
+							<label for="monto">Monto:</label>
+							<input name="monto" />
+						</li>
+						<li>
+							<label for="concepto">Concepto:</label>
+							<input name="concepto" />
+						</li>
+						<li>
+							<label for="cheque">Cheque:</label>
+							<input name="cheque" />
+						</li>
+						<li><input value="Agregar" type="submit" /></li>
+					</ol>
+				</fieldset>
+			</form>
+			<form action="devolucion/reporte">
 				<fieldset>
 					<legend>Mostrar Reporte</legend>
 					<ol>
