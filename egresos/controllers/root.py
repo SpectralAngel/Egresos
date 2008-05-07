@@ -21,12 +21,24 @@ import turbogears as tg
 from turbogears import controllers, expose, flash
 # from egresos import model
 from turbogears import identity, redirect
-from cherrypy import request, response
+from cherrypy   import request, response
+from beneficio  import Beneficio
+from seguro 	import Seguro
+from auxilio	import Auxilio
+from funebre	import Funebre
+from devolucion import Devolucion
 # from egresos import json
 # import logging
 # log = logging.getLogger("egresos.controllers")
 
 class Root(controllers.RootController):
+	
+	beneficio = Beneficio()
+	seguro = Seguro()
+	auxilio = Auxilio()
+	devolucion = Devolucion()
+	funebre = Funebre()
+	
 	@expose(template="egresos.templates.welcome")
 	# @identity.require(identity.in_group("admin"))
 	def index(self):

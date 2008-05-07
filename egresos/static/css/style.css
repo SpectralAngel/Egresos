@@ -1,28 +1,84 @@
+@CHARSET "UTF-8";
+
 /*
  * Quick mash-up of CSS for the TG quick start page.
  */
 
 html, body {
   color: black;
-  background-color: #ddd;
   font: x-small "Lucida Grande", "Lucida Sans Unicode", geneva, verdana, sans-serif;
   margin: 0;
   padding: 0;
 }
 
+#header
+{
+	height: 55px;
+	position: relative;
+	background: #cec;
+}
+
+#header h1, #header h2
+{
+	padding: 0;
+	margin: 0;
+	position: absolute;
+}
+
+#header h1
+{
+	top: 10px;
+	left: 8px;
+}
+#header h2
+{
+	top: 15px;
+	left: 210px;
+}
+
+#navegacion
+{
+	float: right;
+	padding: 0px 6px 8px 10px;
+}
+
+#busqueda
+{
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	top: 2em;
+	right: 5px;
+}
+
+#busqueda input
+{
+	padding: 0;
+	margin: 0;
+	vertical-align: middle;
+}
+
+.flash {
+  margin: 0.5em;
+  padding: 15px 10px 15px 55px;
+  background: pink;
+  border: 1px dashed red;
+  width: 450px;
+  font-size: 120%;
+  font-weight: bolder;
+  text-align: center;
+}
+#breadcrumb
+{
+	padding: 5px;
+	background: pink;
+}
+
+table { width: 100%; }
 td, th {padding:3px;border:none;}
 tr th {text-align:left;background-color:#f0f0f0;color:#333;}
 tr.odd td {background-color:#edf3fe;}
 tr.even td {background-color:#fff;}
-
-#header {
-  height: 80px;
-  width: 777px;
-  background: blue URL('../images/header_inner.png') no-repeat;
-  border-left: 1px solid #aaa;
-  border-right: 1px solid #aaa;
-  margin: 0 auto 0 auto;
-}
 
 a.link, a, a.active {
   color: #369;
@@ -33,7 +89,6 @@ a.link, a, a.active {
   color: black;
   font-size: 127%;
   background-color: white;
-  width: 757px;
   margin: 0 auto 0 auto;
   border-left: 1px solid #aaa;
   border-right: 1px solid #aaa;
@@ -97,7 +152,6 @@ h2 {
   padding: 10px;
   font-size: 80%;
   text-align: center;
-  width: 757px;
   margin: 0 auto 1em auto;
 }
 

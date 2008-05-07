@@ -78,6 +78,8 @@ class Funebre(Entity):
 
 class Seguro(Entity):
 	
+	using_options(tablename='seguro')
+	
 	afiliado = ManyToOne("Afiliado")
 	fecha = Field(DateTime, required=True, default=datetime.now)
 	fallecimiento = Field(DateTime, required=True, default=datetime.now)
@@ -89,12 +91,14 @@ class Seguro(Entity):
 
 class Beneficiario(Entity):
 	
+	using_options(tablename='beneficiario')
+	
 	seguro = ManyToOne("Seguro")
 	nombre = Field(String(50), required=True)
 	monto = Field(Currency, required=True)
-	cheque = Field(String(20), required=True) 
+	cheque = Field(String(20), required=True)
 
-class Devoluciones(Entity):
+class Devolucion(Entity):
 	
 	afiliado = ManyToOne("Afiliado")
 	concepto = Field(Text)

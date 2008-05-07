@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+							"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:py="http://genshi.edgewall.org/"
+	xmlns:xi="http://www.w3.org/2001/XInclude">
+<xi:include href="../master.html" />
+<head>
+	<title></title>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+</head>
+<body>
+	<div id="sidebar"></div>
+	<div id="getting_started">
+		<h1 py:content="'Seguro de Vida', seguro.id" />
+		<h2>
+			<span py:if="recibo.afiliado != None" py:content="recibo.afiliado" />
+			<span py:content="recibo.cliente" />
+		</h2>
+		<table>
+			<caption>Beneficiarios</caption>
+			<colgroup width="25%">
+				<col />
+				<col />
+				<col />
+				<col />
+			</colgroup>
+			<thead>	
+				<tr>
+					<th>Nombre</th>
+					<th>Monto</th>
+					<th>Cheque</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr py:for="beneficiario in seguro.beneficiarios" id="beneficiario-${beneficiario.id}">
+					<td py:content="beneficiario.nombre" />
+					<td py:content="locale.currency(beneficiario.monto, True, True)" />
+					<td py:content="beneficiario.cheque" />
+					<td><a href="${tg.url('seguro/beneficiario/eliminar/%s' % beneficiario.id)}">Eliminar</a></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="2">Total:</th>
+					<th py:content="locale.currency(seguro.monto(), True, True)" />
+				</tr>
+			</tfoot>
+		</table>
+		<form action="beneficiario/agregar">
+			<table>
+				<colgroup width="25%">
+					<col />
+					<col />
+					<col />
+					<col />
+				</colgroup>
+				<tr>
+					<td><input name="nombre" id="nombre" /></td>
+					<td><input name="monto" class="monto" id="monto" /></td>
+					<td><input name="cheque" /></td>
+					<td>
+						<input type="hidden" value="${seguro.id}" name="seguro" />
+						<input type="submit" value="Agregar" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,53 +1,150 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:py="http://genshi.edgewall.org/"
-      xmlns:xi="http://www.w3.org/2001/XInclude">
+	xmlns:py="http://genshi.edgewall.org/"
+	xmlns:xi="http://www.w3.org/2001/XInclude">
 
 <xi:include href="master.html" />
 
 <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
-    <title>Welcome to TurboGears</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/static/css/style.css')}" />
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''" />
+	<title>Control de Ingresos</title>
+	<link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/static/css/style.css')}" />
 </head>
 
 <body>
-  <div id="sidebar">
-    <h2>Learn more</h2>
-    Learn more about TurboGears and take part in its
-    development
-    <ul class="links">
-      <li><a href="http://www.turbogears.org">Official website</a></li>
-      <li><a href="http://docs.turbogears.org">Documentation</a></li>
-      <li><a href="http://trac.turbogears.org/turbogears/">Trac
-        (bugs/suggestions)</a></li>
-      <li><a href="http://groups.google.com/group/turbogears"> Mailing list</a> </li>
-    </ul>
-    <span py:replace="now">now</span>
-  </div>
-  <div id="getting_started">
-    <ol id="getting_started_steps">
-      <li class="getting_started">
-        <h3>Model</h3>
-        <p> <a href="http://docs.turbogears.org/1.0/GettingStarted/DefineDatabase">Design models</a> in the <span class="code">model.py</span>.<br/>
-          Edit <span class="code">dev.cfg</span> to <a href="http://docs.turbogears.org/1.0/GettingStarted/UseDatabase">use a different backend</a>, or start with a pre-configured SQLite database. <br/>
-          Use script <span class="code">tg-admin sql create</span> to create the database tables.</p>
-      </li>
-      <li class="getting_started">
-        <h3>View</h3>
-        <p> Edit <a href="http://docs.turbogears.org/1.0/GettingStarted/Kid">html-like templates</a> in the <span class="code">/templates</span> folder;<br/>
-        Put all <a href="http://docs.turbogears.org/1.0/StaticFiles">static contents</a> in the <span class="code">/static</span> folder. </p>
-      </li>
-      <li class="getting_started">
-        <h3>Controller</h3>
-        <p> Edit <span class="code"> controllers.py</span> and <a href="http://docs.turbogears.org/1.0/GettingStarted/CherryPy">build your
-          website structure</a> with the simplicity of Python objects. <br/>
-          TurboGears will automatically reload itself when you modify your project. </p>
-      </li>
-    </ol>
-    <div class="notice"> If you create something cool, please <a href="http://groups.google.com/group/turbogears">let people know</a>, and consider contributing something back to the <a href="http://groups.google.com/group/turbogears">community</a>.</div>
-  </div>
-
+	<div id="sidebar"></div>
+	<div id="getting_started">
+		<u>
+			<li><a href="#sobrevivencia">Beneficio de Sobrevivencia</a></li>
+			<li><a href="#seguro">Seguro de Vida</a></li>
+			<li><a href="#auxilio">Auxilio</a></li>
+		</u>
+		<div id="sobrevivencia">
+			<h1>Beneficios de Sobrevivencia</h1>
+			<form action="beneficio/agregar">
+				<fieldset>
+					<legend>Agregar</legend>
+					<ol>
+						<li>
+							<label for="afiliado">Afiliaci&oacute;n</label>
+							<input name="afiliado" />
+						</li>
+						<li>
+							<label for="fecha">Fecha</label>
+							<input name="fecha" class="fecha" />
+						</li>
+						<li>
+							<label for="monto">Monto</label>
+							<input name="monto" />
+						</li>
+						<li>
+							<label for="cheque">Cheque</label>
+							<input name="cheque" />
+						</li>
+						<li><input value="Agregar" type="submit" /></li>
+					</ol>
+				</fieldset>
+			</form>
+			<form action="beneficios/reporte">
+				<fieldset>
+					<legend>Mostrar Reporte</legend>
+					<ol>
+						<li>
+							<label for="inicio">Fecha de Inicio</label>
+							<input name="inicio" class="fecha" />
+						</li>
+						<li>
+							<label for="final">Fecha de Cierre</label>
+							<input name="final" class="fecha" />
+						</li>
+						<li><input value="Mostrar" type="submit" /></li>
+					</ol>
+				</fieldset>
+			</form>
+		</div>
+		<div id="seguro">
+			<h1>Seguro de Vida</h1>
+			<form action="seguro/agregar">
+				<fieldset>
+					<legend>Agregar</legend>
+					<ol>
+						<li>
+							<label for="afiliado">Afiliaci&oacute;n</label>
+							<input name="afiliado" />
+						</li>
+						<li>
+							<label for="fecha">Entrega</label>
+							<input name="fecha" class="fecha" />
+						</li>
+						<li>
+							<label for="fecha">Fallecimiento</label>
+							<input name="fallecimiento" class="fecha" />
+						</li>
+						<li><input value="Agregar" type="submit" /></li>
+					</ol>
+				</fieldset>
+			</form>
+			<form action="beneficios/reporte">
+				<fieldset>
+					<legend>Mostrar Reporte</legend>
+					<ol>
+						<li>
+							<label for="inicio">Fecha de Inicio</label>
+							<input name="inicio" class="fecha" />
+						</li>
+						<li>
+							<label for="final">Fecha de Cierre</label>
+							<input name="final" class="fecha" />
+						</li>
+						<li><input value="Mostrar" type="submit" /></li>
+					</ol>
+				</fieldset>
+			</form>
+		</div>
+		<div id="auxilio">
+			<h1>Auxilio</h1>
+			<form action="auxilio/agregar">
+				<fieldset>
+					<legend>Agregar</legend>
+					<ol>
+						<li>
+							<label for="afiliado">Afiliaci&oacute;n:</label>
+							<input name="afiliado" />
+						</li>
+						<li>
+							<label for="fecha">Fecha:</label>
+							<input name="fecha" class="fecha" />
+						</li>
+						<li>
+							<label for="monto">Monto:</label>
+							<input name="monto" />
+						</li>
+						<li>
+							<label for="cheque">Cheque:</label>
+							<input name="cheque" />
+						</li>
+						<li><input value="Agregar" type="submit" /></li>
+					</ol>
+				</fieldset>
+			</form>
+			<form action="auxilio/reporte">
+				<fieldset>
+					<legend>Mostrar Reporte</legend>
+					<ol>
+						<li>
+							<label for="inicio">Fecha de Inicio</label>
+							<input name="inicio" class="fecha" />
+						</li>
+						<li>
+							<label for="final">Fecha de Cierre</label>
+							<input name="final" class="fecha" />
+						</li>
+						<li><input value="Mostrar" type="submit" /></li>
+					</ol>
+				</fieldset>
+			</form>
+		</div>
+	</div>
 </body>
 </html>

@@ -17,6 +17,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
+import turbogears as tg
 from turbogears	import controllers, identity, validators
 from turbogears	import flash, redirect
 from turbogears	import expose, paginate, validate, error_handler
@@ -25,7 +26,7 @@ from egresos	import model
 
 class Beneficios(controllers.Controller):
 	
-	@expose(template="recibo.templates.usuario.index")
+	@expose()
 	def index(self,  tg_errors=None):
 		
 		if tg_errors:
@@ -62,7 +63,7 @@ class Beneficios(controllers.Controller):
 		
 		flash('Se ha agregado el Beneficio de Sobrevivencia al afiliado %s' % afiliado.id)
 		
-		return self.default(beneficio.id)
+		return redirect(tg.url('/'))
 	
 	@error_handler(index)
 	@expose()
@@ -75,12 +76,12 @@ class Beneficios(controllers.Controller):
 		
 		flash('Se ha eliminado el Beneficio de Sobrevivencia al afiliado %s' % afiliado.id)
 		
-		return self.index()
+		return redirect(tg.url('/'))
 	
 	@error_handler(index)
-	@expose()
+	@expose(template="egresos.templates.beneficio.reporte")
 	@validate(validators=dict(inicio=validators.DateTimeConverter(format='%d/%m/%Y'),
 							fin=validators.DateTimeConverter(format='%d/%m/%Y')))
 	def reporte(self, inicio, fin):
 		
-		return dict(beneficios=model.Beneficio.query.filter(fecha>=inicio,fecha<=fin))
+		return dict(beneficios=model.Beneficio.query.filter(fecha>=inicio,fecha<=fin), inicio=inicio, fin=fin)
