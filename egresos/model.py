@@ -158,7 +158,7 @@ class User(Entity):
 	"""
 	using_options(tablename='tg_user')
 
-	user_id = Field(Integer, primary_key=True)
+	user_id = Field(Integer, primary_key=True,colname="id")
 	user_name = Field(Unicode(16), unique=True)
 	email_address = Field(Unicode(255), unique=True)
 	display_name = Field(Unicode(255))

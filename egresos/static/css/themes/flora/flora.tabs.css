@@ -48,7 +48,7 @@
     outline: 0; /* @ Firefox, prevent dotted border after click */    
 }
 .ui-tabs-nav a:link, .ui-tabs-nav a:visited {
-    color: #fff;
+    color: green;
 }
 .ui-tabs-nav .ui-tabs-selected a {
     position: relative;

@@ -50,13 +50,13 @@ class Sobrevivencia(controllers.Controller):
 	@error_handler(index)
 	@expose()
 	@validate(validators=dict(afiliado=validators.Int(),
-							monto=validators.Money(),
+							monto=validators.String(),
 							fecha=validators.DateTimeConverter(format='%d/%m/%Y'),
 							cheque=validators.String()))
 	def agregar(self, afiliado, **kw):
 		
 		afiliado = model.Afiliado.get(afiliado)
-		
+		kw['monto'] = Decimal(kw['monto'])
 		sobrevivencia = model.Sobrevivencia(**kw)
 		sobrevivencia.afiliado = afiliado
 		sobrevivencia.flush()

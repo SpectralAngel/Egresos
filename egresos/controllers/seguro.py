@@ -23,6 +23,7 @@ from turbogears	import flash, redirect
 from turbogears	import expose, paginate, validate, error_handler
 from cherrypy	import request, response
 from egresos	import model
+from decimal	import *
 
 class Beneficiario(controllers.Controller):
 	
@@ -39,11 +40,11 @@ class Beneficiario(controllers.Controller):
 	@validate(validators=dict(seguro=validators.Int(),
 							nombre=validators.String(),
 							cheque=validators.String(),
-							monto=validators.Money()))
+							monto=validators.String()))
 	def agregar(self, seguro, **kw):
 		
 		seguro = model.Seguro.get(seguro)
-		
+		kw['monto'] = Decimal(kw['monto'])
 		beneficiario = model.Beneficiario(**kw)
 		beneficiario.seguro = seguro
 		beneficiario.flush()

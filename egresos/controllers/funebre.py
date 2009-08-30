@@ -51,13 +51,13 @@ class Funebre(controllers.Controller):
 	@expose()
 	@validate(validators=dict(afiliado=validators.Int(),
 							pariente=validators.String(),
-							monto=validators.Money(),
+							monto=validators.String(),
 							fecha=validators.DateTimeConverter(format='%d/%m/%Y'),
 							cheque=validators.String()))
 	def agregar(self, afiliado, **kw):
 		
 		afiliado = model.Funebre.get(afiliado)
-		
+		kw['monto'] = Decimal(kw['monto'])
 		funebre = model.Funebre(**kw)
 		funebre.afiliado = afiliado
 		funebre.flush()

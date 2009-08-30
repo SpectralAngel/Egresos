@@ -7,16 +7,13 @@
 <head py:match="head" py:attrs="select('@*')">
 	<script type="text/javascript" src="/static/javascript/jquery.js"></script>
 	
-	<link rel="stylesheet" type="text/css" media="screen"
-									href="${tg.url('/static/css/style.css')}" />
-	<link rel="stylesheet" type="text/css" media="screen"
-									href="${tg.url('/static/css/form.css')}" />
-	<link rel="stylesheet" type="text/css" media="print"
-									href="${tg.url('/static/css/impresion.css')}" />
+	<link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/static/css/style.css')}" />
+	<link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/static/css/form.css')}" />
+	<link rel="stylesheet" type="text/css" media="print" href="${tg.url('/static/css/impresion.css')}" />
 	<script type="text/javascript" src="${tg.url('/static/javascript/ui.datepicker.js')}"></script>
 	<script type="text/javascript" src="${tg.url('/static/javascript/i18n/ui.datepicker-es.js')}"></script>
 	<link rel="stylesheet" type="text/css" href="${tg.url('/static/css/ui.datepicker.css')}" />
-	<link rel="stylesheet" type="text/css" href="${tg.url('/static/javascript/themes/flora/flora.all.css')}" />
+	<link rel="stylesheet" type="text/css" href="${tg.url('/static/css/themes/flora/flora.all.css')}" />
 	<script type="text/javascript">
 	$(document).ready(function()
 	{
@@ -41,7 +38,7 @@
 		</div>
 		<form action="${tg.url('/afiliado')}" id="busqueda">
 			<div>
-				<input name="afiliado" /><input type="submit" value="Buscar" />
+				<label>Buscar Afiliado</label><input name="afiliado" /><input type="submit" value="Buscar" />
 			</div>
 		</form>
 	</div>

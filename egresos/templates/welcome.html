@@ -9,18 +9,25 @@
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''" />
 	<title>Control de Ingresos</title>
-	<link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/static/css/style.css')}" />
+	<link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/static/css/themes/flora/flora.tabs.css')}" />
+	<script type="text/javascript" src="${tg.url('/static/javascript/ui.tabs.js')}"></script>
+	<script type="text/javascript">
+	$(document).ready(function()
+	{
+		$("#getting_started > ul").tabs();
+	});
+	</script>
 </head>
 
 <body>
 	<div id="getting_started">
-		<u>
+		<ul>
 			<li><a href="#sobrevivencia">Beneficio de Sobrevivencia</a></li>
 			<li><a href="#seguro">Seguro de Vida</a></li>
 			<li><a href="#auxilio">Auxilio</a></li>
 			<li><a href="#devolucion">Devolucion</a></li>
 			<li><a href="#funebre">Fuenbre</a></li>
-		</u>
+		</ul>
 		<div id="sobrevivencia">
 			<h1>Beneficios de Sobrevivencia</h1>
 			<form action="sobrevivencia/agregar">

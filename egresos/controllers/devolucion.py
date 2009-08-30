@@ -23,6 +23,7 @@ from turbogears	import flash, redirect
 from turbogears	import expose, paginate, validate, error_handler
 from cherrypy	import request, response
 from egresos	import model
+from decimal	import *
 
 class Devolucion(controllers.Controller):
 	
@@ -51,13 +52,13 @@ class Devolucion(controllers.Controller):
 	@expose()
 	@validate(validators=dict(afiliado=validators.Int(),
 							concepto=validators.String(),
-							monto=validators.Money(),
+							monto=validators.String(),
 							fecha=validators.DateTimeConverter(format='%d/%m/%Y'),
 							cheque=validators.String()))
 	def agregar(self, afiliado, **kw):
 		
 		afiliado = model.Afiliado.get(afiliado)
-		
+		kw['monto'] = Decimal(kw['monto'])
 		devolucion = model.Devolucion(**kw)
 		devolucion.afiliado = afiliado
 		devolucion.flush()
@@ -88,3 +89,4 @@ class Devolucion(controllers.Controller):
 		devoluciones = model.Devolucion.query.all()
 		
 		return dict(devoluciones=[s for s in devoluciones if s.fecha >= inicio or s.fecha >= fin], inicio=inicio, fin=fin)
+
