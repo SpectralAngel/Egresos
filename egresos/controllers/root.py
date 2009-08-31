@@ -34,9 +34,7 @@ from devolucion 	import Devolucion
 # import logging
 # log = logging.getLogger("egresos.controllers")
 
-class Root(controllers.RootController, identity.SecureResource):
-	
-	require = identity.not_anonymous()
+class Root(controllers.RootController):
 	
 	sobrevivencia = Sobrevivencia()
 	seguro = Seguro()
@@ -44,6 +42,7 @@ class Root(controllers.RootController, identity.SecureResource):
 	devolucion = Devolucion()
 	funebre = Funebre()
 	
+	@identity.require(identity.not_anonymous())
 	@expose(template="egresos.templates.welcome")
 	# @identity.require(identity.in_group("admin"))
 	def index(self):
