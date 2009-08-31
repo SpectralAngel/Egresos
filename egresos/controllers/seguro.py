@@ -25,7 +25,9 @@ from cherrypy	import request, response
 from egresos	import model
 from decimal	import *
 
-class Beneficiario(controllers.Controller):
+class Beneficiario(controllers.Controller, identity.SecureResource):
+	
+	require = identity.not_anonymous()
 	
 	@expose()
 	def index(self,  tg_errors=None):

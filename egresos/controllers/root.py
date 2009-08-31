@@ -34,7 +34,9 @@ from devolucion 	import Devolucion
 # import logging
 # log = logging.getLogger("egresos.controllers")
 
-class Root(controllers.RootController):
+class Root(controllers.RootController, identity.SecureResource):
+	
+	require = identity.not_anonymous()
 	
 	sobrevivencia = Sobrevivencia()
 	seguro = Seguro()

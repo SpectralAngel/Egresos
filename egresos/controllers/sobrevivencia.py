@@ -24,7 +24,9 @@ from turbogears	import expose, paginate, validate, error_handler
 from cherrypy	import request, response
 from egresos	import model
 
-class Sobrevivencia(controllers.Controller):
+class Sobrevivencia(controllers.Controller, identity.SecureResource):
+	
+	require = identity.not_anonymous()
 	
 	@expose()
 	def index(self,  tg_errors=None):
