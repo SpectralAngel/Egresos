@@ -22,8 +22,20 @@
 <body>
 	<div id="getting_started">
 		<div id="sobrevivencia">
+			<h1>Filiales</h1>
+            <form action="${tg.url('/filial/mostrar')}">
+				<fieldset>
+					<legend>Mostrar una Filial</legend>
+					<ol>
+						<li>
+							<label for="filial">Filial</label>
+							<select name="filial" />
+						</li>
+						<li><input value="Mostrar" type="submit" /></li>
+					</ol>
+				</fieldset>
 			</form>
-			<form action="${tg.url('filial/agregar')}">
+			<form action="${tg.url('/filial/agregar')}">
 				<fieldset>
 					<legend>Agregar</legend>
 					<ol>

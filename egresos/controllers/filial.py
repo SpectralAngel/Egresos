@@ -43,6 +43,7 @@ class PagoFilial(controllers.Controller, identity.SecureResource):
         kw['saldo'] = filial.saldo() + kw['monto']
          
         pago = model.PagoFilial(**kw)
+        pago.filial = filial
         pago.flush()
         
         raise redirect(tg.url('/filial/%s' % filial.id))
@@ -51,7 +52,7 @@ class PagoFilial(controllers.Controller, identity.SecureResource):
     @validate(validators=dict(pago=validators.Int()))
     def eliminar(self, pago):
         
-        pago = model.Pago.get(pago)
+        pago = model.PagoFilial.get(pago)
         filial = pago.filial
         pago.delete()
         
@@ -60,6 +61,8 @@ class PagoFilial(controllers.Controller, identity.SecureResource):
 class Filial(controllers.Controller, identity.SecureResource):
     
     require = identity.not_anonymous()
+    
+    pago = PagoFilial()
     
     @expose(template='egresos.templates.filial.index')
     def index(self):

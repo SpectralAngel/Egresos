@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:py="http://genshi.edgewall.org/"
 	xmlns:xi="http://www.w3.org/2001/XInclude">
-<xi:include href="master.html" />
+<xi:include href="../master.html" />
 <?python
 	import locale
 	locale.setlocale(locale.LC_ALL, '')
@@ -26,6 +26,7 @@
 					<th>Valor Cheque</th>
 					<th>Monto</th>
 					<th>Saldo</th>
+                    <th>Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -35,9 +36,35 @@
 					<td>${locale.currency(pago.valor, True, True)}</td>
 					<td>${locale.currency(pago.monto, True, True)}</td>
 					<td>${locale.currency(pago.saldo, True, True)}</td>
+                    <td><a href="${tg.url('/filial/pago/eliminar/%s' % pago.id)}">Eliminar</a></td>
 				</tr>
 			</tbody>
 		</table>
+        <form action="${tg.url('/filial/pago/agregar')}" method="post">
+            <fieldset>
+                <legend>Agregar un Pago</legend>
+                <input type="hidden" name="filial" value="${filial.id}" />
+                <ol>
+                    <li>
+                        <label>Detalle:</label>
+                        <input name="detalle" />
+                    </li>
+                    <li>
+                        <label>Cheque:</label>
+                        <input name="cheque" />
+                    </li>
+                    <li>
+                        <label>Valor del Cheque:</label>
+                        <input name="valor" />
+                    </li>
+                    <li>
+                        <label>Monto:</label>
+                        <input name="monto" />
+                    </li>
+                    <li><input type="submit" value="Agregar" /></li>
+                </ol>
+            </fieldset>
+        </form>
 	</div>
 </body>
 </html>
