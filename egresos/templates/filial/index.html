@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:py="http://genshi.edgewall.org/"
+	xmlns:xi="http://www.w3.org/2001/XInclude">
+
+<xi:include href="../master.html" />
+
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''" />
+	<title>Control de Egresos</title>
+	<link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/static/css/themes/flora/flora.tabs.css')}" />
+	<script type="text/javascript" src="${tg.url('/static/javascript/ui.tabs.js')}"></script>
+	<script type="text/javascript">
+	$(document).ready(function()
+	{
+		$("#getting_started > ul").tabs();
+	});
+	</script>
+</head>
+
+<body>
+	<div id="getting_started">
+		<div id="sobrevivencia">
+			</form>
+			<form action="${tg.url('filial/agregar')}">
+				<fieldset>
+					<legend>Agregar</legend>
+					<ol>
+						<li>
+							<label for="departamento">Departamento</label>
+							<select name="departamento">
+							    <option py:for="d in departamentos" value="${d.id}">${d.nombre}</option>
+							</select>
+						</li>
+						<li>
+							<label for="instituto">Instituto:</label>
+							<input name="instituto" />
+						</li>
+						<li><input value="Agregar" type="submit" /></li>
+					</ol>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

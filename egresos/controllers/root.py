@@ -30,6 +30,7 @@ from seguro 		import Seguro
 from auxilio		import Auxilio
 from funebre		import Funebre
 from devolucion 	import Devolucion
+from filial import Filial
 # from egresos import json
 # import logging
 # log = logging.getLogger("egresos.controllers")
@@ -41,6 +42,7 @@ class Root(controllers.RootController):
 	auxilio = Auxilio()
 	devolucion = Devolucion()
 	funebre = Funebre()
+	filial = Filial()
 	
 	@identity.require(identity.not_anonymous())
 	@expose(template="egresos.templates.welcome")

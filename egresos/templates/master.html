@@ -33,6 +33,7 @@
 		<h1>Gestor de Egresos</h1>
 		<div id="navegacion">
 			<a href="${tg.url('/')}">Inicio</a> |
+            <a href="${tg.url('/filial')}">Filiales</a> |
 			<span py:if="tg.identity.anonymous">| <a href="${tg.url('/login')}">Iniciar Sesi&oacute;n</a></span>
 			<span py:if="not tg.identity.anonymous">| Bienvenido ${tg.identity.user.display_name}. <a href="${tg.url('/logout')}">Cerrar Sesi&oacute;n</a></span>
 		</div>

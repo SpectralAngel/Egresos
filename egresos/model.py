@@ -17,12 +17,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-from datetime	import datetime
+from datetime	import datetime, date
 from elixir		import Entity, Field, OneToMany, ManyToOne, ManyToMany
 from elixir		import options_defaults, using_options, setup_all
 from elixir		import Integer, Boolean, Numeric
 from elixir		import String, Unicode, Text
-from elixir		import DateTime
+from elixir		import DateTime, Date
 from turbogears	import identity
 
 Currency = Numeric
@@ -109,6 +109,37 @@ class Devolucion(Entity):
 	fecha = Field(DateTime, required=True, default=datetime.now)
 	monto = Field(Currency, required=True)
 	cheque = Field(String(20))
+
+class Departamento(Entity):
+	
+	using_options(tablename='departamento')
+	
+	nombre = Field(Unicode(60))
+	filiales = OneToMany('Filial')
+
+class Filial(Entity):
+	
+	using_options(tablename='filial')
+	
+	instituto = Field(Unicode(255))
+	departamento = ManyToOne('Departamento')
+	pagos = OneToMany('PagoFilial')
+	
+	def saldo(self):
+		
+		return sum(p.monto for p in self.pagos)
+
+class PagoFilial(Entity):
+	
+	using_options(tablename='pago_filial')
+	
+	filial = ManyToOne('Filial')
+	dia = Field(Date, required=True, default=date.today)
+	detalle = Field(Unicode(255))
+	cheque = Field(Unicode(255))
+	valor = Field(Currency)
+	monto = Field(Currency)
+	saldo = Field(Currency)
 
 # the identity model
 
