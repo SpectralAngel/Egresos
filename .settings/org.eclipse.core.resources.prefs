@@ -1,8 +1,10 @@
-#Mon Feb 08 08:26:05 CST 2010
+#Thu Feb 18 08:56:28 CST 2010
 eclipse.preferences.version=1
 encoding//egresos/controllers/devolucion.py=utf8
 encoding//egresos/controllers/filial.py=utf8
 encoding//egresos/controllers/funebre.py=utf8
 encoding//egresos/controllers/root.py=utf8
+encoding//egresos/controllers/seguro.py=utf8
+encoding//egresos/controllers/sobrevivencia.py=utf8
 encoding//egresos/model.py=utf8
 encoding/start-egresos.py=utf-8

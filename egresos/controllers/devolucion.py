@@ -71,7 +71,7 @@ class Devolucion(controllers.Controller, identity.SecureResource):
 	
 	@error_handler(index)
 	@expose()
-	@validate(validators=dict(auxilio=validators.Int()))
+	@validate(validators=dict(devolucion=validators.Int()))
 	def eliminar(self, devolucion):
 		
 		devolucion = model.Devolucion.get(devolucion)

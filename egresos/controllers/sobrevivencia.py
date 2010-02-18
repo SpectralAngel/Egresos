@@ -23,6 +23,7 @@ from turbogears	import flash, redirect
 from turbogears	import expose, paginate, validate, error_handler
 from cherrypy	import request, response
 from egresos	import model
+from decimal import Decimal
 
 class Sobrevivencia(controllers.Controller, identity.SecureResource):
 	

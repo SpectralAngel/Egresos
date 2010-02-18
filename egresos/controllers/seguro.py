@@ -109,12 +109,12 @@ class Seguro(controllers.Controller):
 	
 	@error_handler(index)
 	@expose()
-	@validate(validators=dict(auxilio=validators.Int()))
+	@validate(validators=dict(seguro=validators.Int()))
 	def eliminar(self, seguro):
 		
 		seguro = model.Seguro.get(seguro)
 		afiliado = seguro.afiliado
-		auxilio.delete()
+		seguro.delete()
 		
 		flash('Se ha eliminado el Seguro de Vida al afiliado %s' % afiliado.id)
 		
