@@ -21,8 +21,8 @@ import turbogears as tg
 from turbogears	import controllers, identity, validators
 from turbogears	import flash, redirect
 from turbogears	import expose, paginate, validate, error_handler
-from cherrypy	import request, response
 from egresos	import model
+from decimal import Decimal
 
 class Funebre(controllers.Controller, identity.SecureResource):
 	
@@ -39,15 +39,15 @@ class Funebre(controllers.Controller, identity.SecureResource):
 	@error_handler(index)
 	@expose()
 	@validate(validators=dict(funebre=validators.Int()))
-	def default(self, devolucion):
+	def default(self, funebre):
 		
-		return dict(funebre=model.Funebre.get(auxilio))
+		return dict(funebre=model.Funebre.get(funebre))
 	
 	@error_handler(index)
 	@validate(validators=dict(funebre=validators.Int()))
 	def mostrar(self, funebre):
 		
-		return self.default(devolucion)
+		return self.default(funebre)
 	
 	@error_handler(index)
 	@expose()
@@ -55,7 +55,8 @@ class Funebre(controllers.Controller, identity.SecureResource):
 							pariente=validators.String(),
 							monto=validators.String(),
 							fecha=validators.DateTimeConverter(format='%d/%m/%Y'),
-							cheque=validators.String()))
+							cheque=validators.String(),
+							banco=validators.String()))
 	def agregar(self, afiliado, **kw):
 		
 		afiliado = model.Funebre.get(afiliado)

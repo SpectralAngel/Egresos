@@ -55,7 +55,8 @@ class Sobrevivencia(controllers.Controller, identity.SecureResource):
 	@validate(validators=dict(afiliado=validators.Int(),
 							monto=validators.String(),
 							fecha=validators.DateTimeConverter(format='%d/%m/%Y'),
-							cheque=validators.String()))
+							cheque=validators.String(),
+							banco=validators.String()))
 	def agregar(self, afiliado, **kw):
 		
 		afiliado = model.Afiliado.get(afiliado)

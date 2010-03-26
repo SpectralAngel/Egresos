@@ -21,7 +21,7 @@ import turbogears as tg
 from turbogears import controllers, identity, validators
 from turbogears import expose, validate, redirect
 from egresos import model
-from decimal import *
+from decimal import Decimal
 
 class PagoFilial(controllers.Controller, identity.SecureResource):
     

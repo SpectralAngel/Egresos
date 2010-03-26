@@ -42,7 +42,8 @@ class Beneficiario(controllers.Controller, identity.SecureResource):
 	@validate(validators=dict(seguro=validators.Int(),
 							nombre=validators.String(),
 							cheque=validators.String(),
-							monto=validators.String()))
+							monto=validators.String(),
+							banco=validators.String()))
 	def agregar(self, seguro, **kw):
 		
 		seguro = model.Seguro.get(seguro)

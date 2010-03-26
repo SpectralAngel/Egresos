@@ -56,7 +56,8 @@ class Devolucion(controllers.Controller, identity.SecureResource):
 							concepto=validators.String(),
 							monto=validators.String(),
 							fecha=validators.DateTimeConverter(format='%d/%m/%Y'),
-							cheque=validators.String()))
+							cheque=validators.String(),
+							banco=validators.String()))
 	def agregar(self, afiliado, **kw):
 		
 		afiliado = model.Afiliado.get(afiliado)
@@ -88,7 +89,6 @@ class Devolucion(controllers.Controller, identity.SecureResource):
 							fin=validators.DateTimeConverter(format='%d/%m/%Y')))
 	def reporte(self, inicio, fin):
 		
-		devoluciones = model.Devolucion.query.all()
-		
-		return dict(devoluciones=[s for s in devoluciones if s.fecha >= inicio or s.fecha >= fin], inicio=inicio, fin=fin)
-
+		devoluciones = model.Devolucion.query.filter_by(fecha>=inicio).filter_by(fecha<=fin).all()
+        
+        return dict(devoluciones=devoluciones, inicio=inicio, fin=fin)

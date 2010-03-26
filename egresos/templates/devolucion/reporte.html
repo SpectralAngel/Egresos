@@ -27,6 +27,7 @@
 					<th>Concepto</th>
 					<th>Fecha</th>
 					<th>Cheque</th>
+                    <th>Banco</th>
 					<th>Monto</th>
 				</tr>
 			</thead>
@@ -37,6 +38,7 @@
 					<td py:content="devolucion.concepto" />
 					<td py:content="devolucion.fecha.strftime('%d/%m/%Y')" />
 					<td py:content="devolucion.cheque" />
+                    <td py:content="devolucion.banco" />
 					<td py:content="locale.currency(devolucion.monto, True, True)" />
 				</tr>
 			</tbody>

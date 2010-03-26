@@ -26,6 +26,7 @@
 					<th>Nombre</th>
 					<th>Entrega</th>
 					<th>Cheque</th>
+                    <th>Banco</th>
 					<th>Monto</th>
 				</tr>
 			</thead>
@@ -35,6 +36,7 @@
 					<td py:content="auxilio.afiliado.nombre, ' ', auxilio.afiliado.apellidos" />
 					<td py:content="auxilio.fecha.strftime('%d/%m/%Y')" />
 					<td py:content="auxilio.cheque" />
+                    <td py:content="auxilio.banco" />
 					<td py:content="locale.currency(auxilio.monto, True, True)" />
 				</tr>
 			</tbody>

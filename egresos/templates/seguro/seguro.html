@@ -30,6 +30,7 @@
 					<th>Nombre</th>
 					<th>Monto</th>
 					<th>Cheque</th>
+                    <th>Banco</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
@@ -38,6 +39,7 @@
 					<td py:content="beneficiario.nombre" />
 					<td py:content="locale.currency(beneficiario.monto, True, True)" />
 					<td py:content="beneficiario.cheque" />
+                    <td py:content="beneficiario.banco" />
 					<td><a href="${tg.url('seguro/beneficiario/eliminar/%s' % beneficiario.id)}">Eliminar</a></td>
 				</tr>
 			</tbody>
@@ -60,6 +62,7 @@
 					<td><input name="nombre" id="nombre" /></td>
 					<td><input name="monto" class="monto" id="monto" /></td>
 					<td><input name="cheque" /></td>
+                    <td><input name="banco" /></td>
 					<td>
 						<input type="hidden" value="${seguro.id}" name="seguro" />
 						<input type="submit" value="Agregar" />

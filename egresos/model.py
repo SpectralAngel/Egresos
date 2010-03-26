@@ -58,6 +58,7 @@ class Auxilio(Entity):
 	fecha = Field(DateTime, required=True, default=datetime.now)
 	monto = Field(Currency, required=True)
 	cheque = Field(String(20))
+	banco = Field(Unicode(50))
 
 class Sobrevivencia(Entity):
 	
@@ -67,6 +68,7 @@ class Sobrevivencia(Entity):
 	fecha = Field(DateTime, required=True, default=datetime.now)
 	monto = Field(Currency, required=True)
 	cheque = Field(String(20))
+	banco = Field(Unicode(50))
 
 class Funebre(Entity):
 	
@@ -77,6 +79,7 @@ class Funebre(Entity):
 	monto = Field(Currency, required=True)
 	cheque = Field(String(20))
 	pariente = Field(String(20))
+	banco = Field(Unicode(50))
 
 class Seguro(Entity):
 	
@@ -99,6 +102,7 @@ class Beneficiario(Entity):
 	nombre = Field(String(50), required=True)
 	monto = Field(Currency, required=True)
 	cheque = Field(String(20), required=True)
+	banco = Field(Unicode(50))
 
 class Devolucion(Entity):
 	
@@ -109,6 +113,7 @@ class Devolucion(Entity):
 	fecha = Field(DateTime, required=True, default=datetime.now)
 	monto = Field(Currency, required=True)
 	cheque = Field(String(20))
+	banco = Field(Unicode(50))
 
 class Departamento(Entity):
 	
