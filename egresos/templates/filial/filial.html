@@ -1,13 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-							"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:py="http://genshi.edgewall.org/"
-	xmlns:xi="http://www.w3.org/2001/XInclude">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:py="http://genshi.edgewall.org/" xmlns:xi="http://www.w3.org/2001/XInclude">
 <xi:include href="../master.html" />
-<?python
-	import locale
-	locale.setlocale(locale.LC_ALL, '')
-?>
 <head>
 	<title>Control de Egresos &bull; Filial {filial.id}</title>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
@@ -26,7 +19,7 @@
 					<th>Valor Cheque</th>
 					<th>Monto</th>
 					<th>Saldo</th>
-                    <th>Acciones</th>
+          <th>Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -36,7 +29,7 @@
 					<td>${locale.currency(pago.valor, True, True)}</td>
 					<td>${locale.currency(pago.monto, True, True)}</td>
 					<td>${locale.currency(pago.saldo, True, True)}</td>
-                    <td><a href="${tg.url('/filial/pago/eliminar/%s' % pago.id)}">Eliminar</a></td>
+          <td><a href="${tg.url('/filial/pago/eliminar/%s' % pago.id)}">Eliminar</a></td>
 				</tr>
 			</tbody>
 		</table>

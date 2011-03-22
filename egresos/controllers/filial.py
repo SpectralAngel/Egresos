@@ -17,7 +17,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-import turbogears as tg
 from turbogears import controllers, identity, validators
 from turbogears import expose, validate, redirect
 from egresos import model
@@ -37,7 +36,7 @@ class PagoFilial(controllers.Controller, identity.SecureResource):
     def agregar(self, filial, **kw):
         
         filial = model.Filial.get(filial)
-        kw['monto'] = Decimal(kw['monto'])
+        kw['monto'] = Decimal(kw['monto'].replace(',', ''))
         kw['valor'] = Decimal(kw['valor'])
         
         kw['saldo'] = filial.saldo() + kw['monto']
@@ -46,7 +45,7 @@ class PagoFilial(controllers.Controller, identity.SecureResource):
         pago.filial = filial
         pago.flush()
         
-        raise redirect(tg.url('/filial/%s' % filial.id))
+        raise redirect('/filial/%s' % filial.id)
     
     @expose()
     @validate(validators=dict(pago=validators.Int()))
@@ -56,7 +55,7 @@ class PagoFilial(controllers.Controller, identity.SecureResource):
         filial = pago.filial
         pago.delete()
         
-        raise redirect(tg.url('/filial/%s' % filial.id))
+        raise redirect('/filial/%s' % filial.id)
 
 class Filial(controllers.Controller, identity.SecureResource):
     
@@ -92,4 +91,4 @@ class Filial(controllers.Controller, identity.SecureResource):
         filial.departamento = departamento
         filial.flush()
         
-        raise redirect(tg.url('/filial/%s' % filial.id))
+        raise redirect('/filial/%s' % filial.id)

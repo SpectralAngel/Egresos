@@ -1,15 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-							"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:py="http://genshi.edgewall.org/"
-	xmlns:xi="http://www.w3.org/2001/XInclude">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:py="http://genshi.edgewall.org/" xmlns:xi="http://www.w3.org/2001/XInclude">
 <xi:include href="../master.html" />
-<?python
-	import locale
-	locale.setlocale(locale.LC_ALL, '')
-?>
 <head>
-	<title></title>
+	<title>Reporte de Egresos por Beneficio de Sobrevivencia</title>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
 </head>
 <body>
@@ -26,7 +19,7 @@
 					<th>Nombre</th>
 					<th>Fecha</th>
 					<th>Cheque</th>
-                    <th>Banco</th>
+          <th>Banco</th>
 					<th>Monto</th>
 				</tr>
 			</thead>
@@ -36,13 +29,13 @@
 					<td py:content="sobrevivencia.afiliado.nombre, ' ', sobrevivencia.afiliado.apellidos" />
 					<td py:content="sobrevivencia.fecha.strftime('%d/%m/%Y')" />
 					<td py:content="sobrevivencia.cheque" />
-                    <td py:content="sobrevivencia.banco" />
+          <td py:content="sobrevivencia.banco" />
 					<td py:content="locale.currency(sobrevivencia.monto, True, True)" />
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
-					<th colspan="4">Total Pagado</th>
+					<th colspan="5">Total Pagado</th>
 					<th py:content="locale.currency(sum(sobrevivencia.monto for sobrevivencia in sobrevivencias), True, True)" />
 				</tr>
 			</tfoot>

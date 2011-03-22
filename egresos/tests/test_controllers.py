@@ -1,7 +1,7 @@
 import unittest
 import turbogears
 from turbogears import testutil
-from egresos.controllers import Root
+from egresos.controllers.root import Root
 import cherrypy
 
 cherrypy.root = Root()

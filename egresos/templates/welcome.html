@@ -1,24 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:py="http://genshi.edgewall.org/"
 	xmlns:xi="http://www.w3.org/2001/XInclude">
-
 <xi:include href="master.html" />
-
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''" />
 	<title>Control de Egresos</title>
-	<link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/static/css/themes/flora/flora.tabs.css')}" />
-	<script type="text/javascript" src="${tg.url('/static/javascript/ui.tabs.js')}"></script>
-	<script type="text/javascript">
-	$(document).ready(function()
-	{
-		$("#getting_started > ul").tabs();
-	});
-	</script>
 </head>
-
 <body>
 	<div id="getting_started">
 		<ul>
@@ -30,7 +18,7 @@
 		</ul>
 		<div id="sobrevivencia">
 			<h1>Beneficios de Sobrevivencia</h1>
-			<form action="sobrevivencia/agregar">
+			<form action="${tg.url('/sobrevivencia/agregar')}">
 				<fieldset>
 					<legend>Agregar</legend>
 					<ol>
@@ -58,7 +46,7 @@
 					</ol>
 				</fieldset>
 			</form>
-			<form action="sobrevivencia/reporte">
+			<form action="${tg.url('/sobrevivencia/reporte')}">
 				<fieldset>
 					<legend>Mostrar Reporte</legend>
 					<ol>
@@ -77,7 +65,7 @@
 		</div>
 		<div id="seguro">
 			<h1>Seguro de Vida</h1>
-			<form action="seguro/agregar">
+			<form action="${tg.url('/seguro/agregar')}">
 				<fieldset>
 					<legend>Agregar</legend>
 					<ol>
@@ -97,7 +85,7 @@
 					</ol>
 				</fieldset>
 			</form>
-			<form action="seguro/reporte">
+			<form action="${tg.url('/seguro/reporte')}">
 				<fieldset>
 					<legend>Mostrar Reporte</legend>
 					<ol>
@@ -116,7 +104,7 @@
 		</div>
 		<div id="auxilio">
 			<h1>Auxilio Funebre</h1>
-			<form action="auxilio/agregar">
+			<form action="${tg.url('/auxilio/agregar')}">
 				<fieldset>
 					<legend>Agregar</legend>
 					<ol>
@@ -148,7 +136,7 @@
 					</ol>
 				</fieldset>
 			</form>
-			<form action="auxilio/reporte">
+			<form action="${tg.url('/auxilio/reporte')}">
 				<fieldset>
 					<legend>Mostrar Reporte</legend>
 					<ol>
@@ -167,7 +155,7 @@
 		</div>
 		<div id="devolucion">
 			<h1>Devoluciones</h1>
-			<form action="devolucion/agregar">
+			<form action="${tg.url('/devolucion/agregar')}">
 				<fieldset>
 					<legend>Agregar</legend>
 					<ol>
@@ -199,7 +187,7 @@
 					</ol>
 				</fieldset>
 			</form>
-			<form action="devolucion/reporte">
+			<form action="${tg.url('/devolucion/reporte')}">
 				<fieldset>
 					<legend>Mostrar Reporte</legend>
 					<ol>
@@ -218,7 +206,7 @@
 		</div>
 		<div id="funebre">
 			<h1>Ayuda Funebre</h1>
-			<form action="funebre/agregar">
+			<form action="${tg.url('/funebre/agregar')}">
 				<fieldset>
 					<legend>Agregar</legend>
 					<ol>
@@ -250,7 +238,7 @@
 					</ol>
 				</fieldset>
 			</form>
-			<form action="funebre/reporte">
+			<form action="${tg.url('/funebre/reporte')}">
 				<fieldset>
 					<legend>Mostrar Reporte</legend>
 					<ol>

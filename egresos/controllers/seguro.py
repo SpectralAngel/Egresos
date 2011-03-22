@@ -1,7 +1,6 @@
-#!/usr/bin/env python
 # -*- coding: utf8 -*-
 #
-# Copyright © 2008 Carlos Flores <cafg10@gmail.com>
+# Copyright (c) 2008 - 2011 Carlos Flores <cafg10@gmail.com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,13 +16,11 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-import turbogears as tg
 from turbogears	import controllers, identity, validators
 from turbogears	import flash, redirect
-from turbogears	import expose, paginate, validate, error_handler
-from cherrypy	import request, response
+from turbogears	import expose, validate, error_handler
 from egresos	import model
-from decimal	import *
+from decimal	import Decimal
 
 class Beneficiario(controllers.Controller, identity.SecureResource):
 	
@@ -39,20 +36,19 @@ class Beneficiario(controllers.Controller, identity.SecureResource):
 	
 	@error_handler(index)
 	@expose()
-	@validate(validators=dict(seguro=validators.Int(),
-							nombre=validators.String(),
-							cheque=validators.String(),
-							monto=validators.String(),
-							banco=validators.String()))
+	@validate(validators=dict(seguro=validators.Int(),nombre=validators.String(),
+							cheque=validators.String(),monto=validators.String(),
+							banco=validators.String(),
+							fecha=validators.DateTimeConverter(format='%d/%m/%Y')))
 	def agregar(self, seguro, **kw):
 		
 		seguro = model.Seguro.get(seguro)
-		kw['monto'] = Decimal(kw['monto'])
+		kw['monto'] = Decimal(kw['monto'].replace(',', ''))
 		beneficiario = model.Beneficiario(**kw)
 		beneficiario.seguro = seguro
 		beneficiario.flush()
 		
-		raise redirect(tg.url('/seguro/%s' % seguro.id))
+		raise redirect('/seguro/{0}'.format(seguro.id))
 	
 	@error_handler(index)
 	@expose()
@@ -64,7 +60,7 @@ class Beneficiario(controllers.Controller, identity.SecureResource):
 		beneficiario.delete()
 		flash('Se ha eliminado el beneficiario')
 		
-		raise redirect(tg.url('/seguro/%s' % seguro.id))
+		raise redirect('/seguro/{0}'.format(seguro.id))
 
 class Seguro(controllers.Controller):
 	
@@ -104,7 +100,7 @@ class Seguro(controllers.Controller):
 		seguro.afiliado = afiliado
 		seguro.flush()
 		
-		flash('Se ha agregado el Seguro de Vida al afiliado %s' % afiliado.id)
+		flash(u'Se ha agregado el Seguro de Vida al afiliado %s' % afiliado.id)
 		
 		return self.default(seguro.id)
 	
@@ -117,9 +113,9 @@ class Seguro(controllers.Controller):
 		afiliado = seguro.afiliado
 		seguro.delete()
 		
-		flash('Se ha eliminado el Seguro de Vida al afiliado %s' % afiliado.id)
+		flash(u'Se ha eliminado el Seguro de Vida al afiliado %s' % afiliado.id)
 		
-		raise redirect(tg.url('/'))
+		raise redirect('/')
 	
 	@error_handler(index)
 	@expose(template="egresos.templates.seguro.reporte")
@@ -127,6 +123,6 @@ class Seguro(controllers.Controller):
 							fin=validators.DateTimeConverter(format='%d/%m/%Y')))
 	def reporte(self, inicio, fin):
 		
-		seguros = model.Seguro.query.all()
+		seguros = model.Seguro.query.filter(model.Seguro.fecha>=inicio).filter(model.Seguro.fecha<=fin).all()
 		
-		return dict(seguros=[s for s in seguros if s.fecha >= inicio or s.fecha >= fin], inicio=inicio, fin=fin)
+		return dict(seguros=seguros, inicio=inicio, fin=fin)

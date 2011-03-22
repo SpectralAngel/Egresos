@@ -17,10 +17,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-import turbogears as tg
 from turbogears	import controllers, identity, validators
 from turbogears	import flash, redirect
-from turbogears	import expose, paginate, validate, error_handler
+from turbogears	import expose, validate, error_handler
 from egresos	import model
 from decimal	import Decimal
 
@@ -60,14 +59,14 @@ class Auxilio(controllers.Controller, identity.SecureResource):
 	def agregar(self, afiliado, **kw):
 		
 		afiliado = model.Afiliado.get(afiliado)
-		kw['monto'] = Decimal(kw['monto'])
+		kw['monto'] = Decimal(kw['monto'].replace(',', ''))
 		auxilio = model.Auxilio(**kw)
 		auxilio.afiliado = afiliado
 		auxilio.flush()
 		
 		flash('Se ha agregado el Auxilio al afiliado %s' % afiliado.id)
 		
-		raise redirect(tg.url('/'))
+		raise redirect('/')
 	
 	@error_handler(index)
 	@expose()
@@ -80,7 +79,7 @@ class Auxilio(controllers.Controller, identity.SecureResource):
 		
 		flash('Se ha eliminado el auxilio al afiliado %s' % afiliado.id)
 		
-		raise redirect(tg.url('/'))
+		raise redirect('/')
 	
 	@error_handler(index)
 	@expose(template="egresos.templates.auxilio.reporte")
@@ -88,6 +87,6 @@ class Auxilio(controllers.Controller, identity.SecureResource):
 							fin=validators.DateTimeConverter(format='%d/%m/%Y')))
 	def reporte(self, inicio, fin):
 		
-		auxilios = model.Auxilio.query.all()
+		auxilios = model.Auxilio.query.filter(model.Auxilio.dia>=inicio).filter(model.Auxilio.dia<=fin).all()
 		
-		return dict(auxilios=[s for s in auxilios if s.fecha >= inicio or s.fecha >= fin], inicio=inicio, fin=fin)
+		return dict(auxilios=auxilios, inicio=inicio, fin=fin)

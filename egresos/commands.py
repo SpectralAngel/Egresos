@@ -24,8 +24,8 @@ from os import getcwd
 from os.path import dirname, exists, join
 
 import pkg_resources
-pkg_resources.require("TurboGears>=1.0.4.4")
-pkg_resources.require("SQLAlchemy>=0.3.10")
+pkg_resources.require("TurboGears>=1.1")
+pkg_resources.require("Elixir>=0.6.0")
 
 import cherrypy
 import turbogears
@@ -35,7 +35,6 @@ cherrypy.lowercase_api = True
 
 class ConfigurationError(Exception):
     pass
-
 
 def start():
     """Start the CherryPy application server."""

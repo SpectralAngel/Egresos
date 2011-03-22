@@ -1,27 +1,28 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-							"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:py="http://genshi.edgewall.org/"
-	xmlns:xi="http://www.w3.org/2001/XInclude" py:strip="">
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:py="http://genshi.edgewall.org/" xmlns:xi="http://www.w3.org/2001/XInclude" py:strip="">
+<?python
+  import locale
+  locale.setlocale(locale.LC_ALL, 'es_HN.utf8')
+?>
 <head py:match="head" py:attrs="select('@*')">
-	<script type="text/javascript" src="/static/javascript/jquery.js"></script>
-	
+	<script type="text/javascript" src="${tg.url('/static/javascript/jquery.js')}"></script>
+	<script type="text/javascript" src="${tg.url('/static/javascript/jquery-ui.js')}"></script>
 	<link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/static/css/style.css')}" />
 	<link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/static/css/form.css')}" />
+	<link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/static/css/ui-lightness/jquery-ui.css')}" />
 	<link rel="stylesheet" type="text/css" media="print" href="${tg.url('/static/css/impresion.css')}" />
-	<script type="text/javascript" src="${tg.url('/static/javascript/ui.datepicker.js')}"></script>
-	<script type="text/javascript" src="${tg.url('/static/javascript/i18n/ui.datepicker-es.js')}"></script>
-	<link rel="stylesheet" type="text/css" href="${tg.url('/static/css/ui.datepicker.css')}" />
-	<link rel="stylesheet" type="text/css" href="${tg.url('/static/css/themes/flora/flora.all.css')}" />
 	<script type="text/javascript">
 	$(document).ready(function()
 	{
-		$('.fecha').attachDatepicker();
+		$('.fecha').datepicker({
+      dateFormat: 'dd/mm/yy',
+      changeMonth: true,
+      changeYear: true,
+      yearRange: 'c-70:c+5'
+    });
 	});
 	</script>
-	<meta content="text/html; charset=UTF-8" http-equiv="content-type"
-															py:replace="''" />
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''" />
 	<title py:replace="''">Your title goes here</title>
 	<link py:for="css in tg_css" py:replace="ET(css.display())" />
 	<link py:for="js in tg_js_head" py:replace="ET(js.display())" />
@@ -33,7 +34,7 @@
 		<h1>Gestor de Egresos</h1>
 		<div id="navegacion">
 			<a href="${tg.url('/')}">Inicio</a> |
-            <a href="${tg.url('/filial')}">Filiales</a> |
+      <a href="${tg.url('/filial')}">Filiales</a> |
 			<span py:if="tg.identity.anonymous">| <a href="${tg.url('/login')}">Iniciar Sesi&oacute;n</a></span>
 			<span py:if="not tg.identity.anonymous">| Bienvenido ${tg.identity.user.display_name}. <a href="${tg.url('/logout')}">Cerrar Sesi&oacute;n</a></span>
 		</div>
@@ -54,7 +55,7 @@
 		<div py:replace="select('*|text()')" />
 		<div py:for="js in tg_js_bodybottom" py:replace="ET(js.display())" />
 	</div>
-	<div id="footer"><p class="copyright">Copyright 2008 Carlos Flores</p></div>
+	<div id="footer"><p class="copyright">Copyright 2008 -2010 Carlos Flores</p></div>
 </body>
 
 </html>

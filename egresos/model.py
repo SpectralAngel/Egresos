@@ -1,7 +1,6 @@
-#!/usr/bin/env python
 # -*- coding: utf8 -*-
 #
-# Copyright © 2008 Carlos Flores <cafg10@gmail.com>
+# Copyright (c) 2008 - 2011 Carlos Flores <cafg10@gmail.com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -103,6 +102,7 @@ class Beneficiario(Entity):
 	monto = Field(Currency, required=True)
 	cheque = Field(String(20), required=True)
 	banco = Field(Unicode(50))
+	fecha = Field(DateTime, required=True, default=datetime.now)
 
 class Devolucion(Entity):
 	

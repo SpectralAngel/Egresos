@@ -17,10 +17,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-import turbogears as tg
 from turbogears	import controllers, identity, validators
 from turbogears	import flash, redirect
-from turbogears	import expose, paginate, validate, error_handler
+from turbogears	import expose, validate, error_handler
 from egresos	import model
 from decimal import Decimal
 
@@ -59,15 +58,15 @@ class Funebre(controllers.Controller, identity.SecureResource):
 							banco=validators.String()))
 	def agregar(self, afiliado, **kw):
 		
-		afiliado = model.Funebre.get(afiliado)
-		kw['monto'] = Decimal(kw['monto'])
+		afiliado = model.Afiliado.get(afiliado)
+		kw['monto'] = Decimal(kw['monto'].replace(',', ''))
 		funebre = model.Funebre(**kw)
 		funebre.afiliado = afiliado
 		funebre.flush()
 		
 		flash('Se ha agregado la Ayuda Funebre al afiliado %s' % afiliado.id)
 		
-		raise redirect(tg.url('/'))
+		raise redirect('/')
 	
 	@error_handler(index)
 	@expose()
@@ -80,7 +79,7 @@ class Funebre(controllers.Controller, identity.SecureResource):
 		
 		flash('Se ha eliminado la Ayuda Funebre al afiliado %s' % afiliado.id)
 		
-		raise redirect(tg.url('/'))
+		raise redirect('/')
 	
 	@error_handler(index)
 	@expose(template="egresos.templates.funebre.reporte")
