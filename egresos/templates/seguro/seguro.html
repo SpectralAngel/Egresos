@@ -9,7 +9,9 @@
   <div id="sidebar"></div>
   <div id="getting_started">
     <h1>Seguro de Vida ${seguro.id}</h1>
-    <h2>${seguro.afiliado.nombre} ${seguro.afiliado.apellidos}</h2>
+    <h2>${seguro.afiliado.id} ${seguro.afiliado.nombre} ${seguro.afiliado.apellidos}</h2>
+    <h3>Fallecimiento: ${seguro.fallecimiento.strftime('%d/%m/%Y')}</h3>
+    <h3>Primera Entrega: ${seguro.fecha.strftime('%d/%m/%Y')}</h3>
     <table>
       <caption>Beneficiarios</caption>
       <colgroup width="20%">

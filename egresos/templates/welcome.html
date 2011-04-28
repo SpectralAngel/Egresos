@@ -1,260 +1,264 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:py="http://genshi.edgewall.org/"
-	xmlns:xi="http://www.w3.org/2001/XInclude">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:py="http://genshi.edgewall.org/" xmlns:xi="http://www.w3.org/2001/XInclude">
 <xi:include href="master.html" />
 <head>
-	<meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''" />
-	<title>Control de Egresos</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''" />
+  <title>Control de Egresos</title>
 </head>
 <body>
-	<div id="getting_started">
-		<ul>
-			<li><a href="#sobrevivencia">Beneficio de Sobrevivencia</a></li>
-			<li><a href="#seguro">Seguro de Vida</a></li>
-			<li><a href="#auxilio">Auxilio</a></li>
-			<li><a href="#devolucion">Devolucion</a></li>
-			<li><a href="#funebre">Fuenbre</a></li>
-		</ul>
-		<div id="sobrevivencia">
-			<h1>Beneficios de Sobrevivencia</h1>
-			<form action="${tg.url('/sobrevivencia/agregar')}">
-				<fieldset>
-					<legend>Agregar</legend>
-					<ol>
-						<li>
-							<label for="afiliado">Afiliaci&oacute;n</label>
-							<input name="afiliado" />
-						</li>
-						<li>
-							<label for="fecha">Fecha</label>
-							<input name="fecha" class="fecha" />
-						</li>
-						<li>
-							<label for="monto">Monto</label>
-							<input name="monto" />
-						</li>
-						<li>
-							<label for="cheque">Cheque</label>
-							<input name="cheque" />
-						</li>
-						<li>
-							<label for="banco">Banco</label>
-							<input name="banco" />
-						</li>
-						<li><input value="Agregar" type="submit" /></li>
-					</ol>
-				</fieldset>
-			</form>
-			<form action="${tg.url('/sobrevivencia/reporte')}">
-				<fieldset>
-					<legend>Mostrar Reporte</legend>
-					<ol>
-						<li>
-							<label for="inicio">Fecha de Inicio</label>
-							<input name="inicio" class="fecha" />
-						</li>
-						<li>
-							<label for="fin">Fecha de Cierre</label>
-							<input name="fin" class="fecha" />
-						</li>
-						<li><input value="Mostrar" type="submit" /></li>
-					</ol>
-				</fieldset>
-			</form>
-		</div>
-		<div id="seguro">
-			<h1>Seguro de Vida</h1>
-			<form action="${tg.url('/seguro/agregar')}">
-				<fieldset>
-					<legend>Agregar</legend>
-					<ol>
-						<li>
-							<label for="afiliado">Afiliaci&oacute;n</label>
-							<input name="afiliado" />
-						</li>
-						<li>
-							<label for="fecha">Entrega</label>
-							<input name="fecha" class="fecha" />
-						</li>
-						<li>
-							<label for="fecha">Fallecimiento</label>
-							<input name="fallecimiento" class="fecha" />
-						</li>
-						<li><input value="Agregar" type="submit" /></li>
-					</ol>
-				</fieldset>
-			</form>
-			<form action="${tg.url('/seguro/reporte')}">
-				<fieldset>
-					<legend>Mostrar Reporte</legend>
-					<ol>
-						<li>
-							<label for="inicio">Fecha de Inicio</label>
-							<input name="inicio" class="fecha" />
-						</li>
-						<li>
-							<label for="fin">Fecha de Cierre</label>
-							<input name="fin" class="fecha" />
-						</li>
-						<li><input value="Mostrar" type="submit" /></li>
-					</ol>
-				</fieldset>
-			</form>
-		</div>
-		<div id="auxilio">
-			<h1>Auxilio Funebre</h1>
-			<form action="${tg.url('/auxilio/agregar')}">
-				<fieldset>
-					<legend>Agregar</legend>
-					<ol>
-						<li>
-							<label for="afiliado">Afiliaci&oacute;n:</label>
-							<input name="afiliado" />
-						</li>
-						<li>
-							<label for="fecha">Fecha:</label>
-							<input name="fecha" class="fecha" />
-						</li>
-						<li>
-							<label for="cobrador">Cobrador:</label>
-							<input name="cobrador" />
-						</li>
-						<li>
-							<label for="monto">Monto:</label>
-							<input name="monto" />
-						</li>
-						<li>
-							<label for="cheque">Cheque:</label>
-							<input name="cheque" />
-						</li>
-						<li>
-							<label for="banco">Banco</label>
-							<input name="banco" />
-						</li>
-						<li><input value="Agregar" type="submit" /></li>
-					</ol>
-				</fieldset>
-			</form>
-			<form action="${tg.url('/auxilio/reporte')}">
-				<fieldset>
-					<legend>Mostrar Reporte</legend>
-					<ol>
-						<li>
-							<label for="inicio">Fecha de Inicio</label>
-							<input name="inicio" class="fecha" />
-						</li>
-						<li>
-							<label for="fin">Fecha de Cierre</label>
-							<input name="fin" class="fecha" />
-						</li>
-						<li><input value="Mostrar" type="submit" /></li>
-					</ol>
-				</fieldset>
-			</form>
-		</div>
-		<div id="devolucion">
-			<h1>Devoluciones</h1>
-			<form action="${tg.url('/devolucion/agregar')}">
-				<fieldset>
-					<legend>Agregar</legend>
-					<ol>
-						<li>
-							<label for="afiliado">Afiliaci&oacute;n:</label>
-							<input name="afiliado" />
-						</li>
-						<li>
-							<label for="fecha">Fecha:</label>
-							<input name="fecha" class="fecha" />
-						</li>
-						<li>
-							<label for="monto">Monto:</label>
-							<input name="monto" />
-						</li>
-						<li>
-							<label for="concepto">Concepto:</label>
-							<input name="concepto" />
-						</li>
-						<li>
-							<label for="cheque">Cheque:</label>
-							<input name="cheque" />
-						</li>
-						<li>
-							<label for="banco">Banco</label>
-							<input name="banco" />
-						</li>
-						<li><input value="Agregar" type="submit" /></li>
-					</ol>
-				</fieldset>
-			</form>
-			<form action="${tg.url('/devolucion/reporte')}">
-				<fieldset>
-					<legend>Mostrar Reporte</legend>
-					<ol>
-						<li>
-							<label for="inicio">Fecha de Inicio</label>
-							<input name="inicio" class="fecha" />
-						</li>
-						<li>
-							<label for="fin">Fecha de Cierre</label>
-							<input name="fin" class="fecha" />
-						</li>
-						<li><input value="Mostrar" type="submit" /></li>
-					</ol>
-				</fieldset>
-			</form>
-		</div>
-		<div id="funebre">
-			<h1>Ayuda Funebre</h1>
-			<form action="${tg.url('/funebre/agregar')}">
-				<fieldset>
-					<legend>Agregar</legend>
-					<ol>
-						<li>
-							<label for="afiliado">Afiliaci&oacute;n:</label>
-							<input name="afiliado" />
-						</li>
-						<li>
-							<label for="fecha">Fecha:</label>
-							<input name="fecha" class="fecha" />
-						</li>
-						<li>
-							<label for="monto">Monto:</label>
-							<input name="monto" />
-						</li>
-						<li>
-							<label for="pariente">Pariente:</label>
-							<input name="pariente" />
-						</li>
-						<li>
-							<label for="cheque">Cheque:</label>
-							<input name="cheque" />
-						</li>
-						<li>
-							<label for="banco">Banco</label>
-							<input name="banco" />
-						</li>
-						<li><input value="Agregar" type="submit" /></li>
-					</ol>
-				</fieldset>
-			</form>
-			<form action="${tg.url('/funebre/reporte')}">
-				<fieldset>
-					<legend>Mostrar Reporte</legend>
-					<ol>
-						<li>
-							<label for="inicio">Fecha de Inicio</label>
-							<input name="inicio" class="fecha" />
-						</li>
-						<li>
-							<label for="fin">Fecha de Cierre</label>
-							<input name="fin" class="fecha" />
-						</li>
-						<li><input value="Mostrar" type="submit" /></li>
-					</ol>
-				</fieldset>
-			</form>
-		</div>
-	</div>
+  <div id="getting_started">
+    <ul>
+      <li><a href="#sobrevivencia">Beneficio de Sobrevivencia</a></li>
+      <li><a href="#seguro">Seguro de Vida</a></li>
+      <li><a href="#auxilio">Auxilio</a></li>
+      <li><a href="#devolucion">Devolucion</a></li>
+      <li><a href="#funebre">Fuenbre</a></li>
+    </ul>
+    <div id="sobrevivencia">
+      <h1>Beneficios de Sobrevivencia</h1>
+      <form action="${tg.url('/sobrevivencia/agregar')}" method="post">
+        <fieldset>
+        <legend>Agregar</legend>
+          <ol>
+            <li>
+              <label for="afiliado">Afiliaci&oacute;n</label>
+              <input name="afiliado" />
+            </li>
+            <li>
+              <label for="fecha">Fecha</label>
+              <input name="fecha" class="fecha" />
+            </li>
+            <li>
+              <label for="monto">Monto</label>
+              <input name="monto" />
+            </li>
+            <li>
+              <label for="cheque">Cheque</label>
+              <input name="cheque" />
+            </li>
+            <li>
+              <label for="banco">Banco</label>
+              <input name="banco" />
+            </li>
+            <li><input value="Agregar" type="submit" /></li>
+          </ol>
+        </fieldset>
+      </form>
+      <form action="${tg.url('/sobrevivencia/reporte')}">
+        <fieldset>
+          <legend>Mostrar Reporte</legend>
+          <ol>
+            <li>
+              <label for="inicio">Fecha de Inicio</label>
+              <input name="inicio" class="fecha" />
+            </li>
+            <li>
+              <label for="fin">Fecha de Cierre</label>
+              <input name="fin" class="fecha" />
+            </li>
+            <li><input value="Mostrar" type="submit" /></li>
+          </ol>
+        </fieldset>
+      </form>
+    </div>
+    <div id="seguro">
+      <h1>Seguro de Vida</h1>
+      <form action="${tg.url('/seguro/agregar')}" method="post">
+        <fieldset>
+          <legend>Agregar</legend>
+          <ol>
+          <li>
+            <label for="afiliado">Afiliaci&oacute;n</label>
+            <input name="afiliado" />
+          </li>
+          <li>
+            <label for="fecha">Entrega</label>
+            <input name="fecha" class="fecha" />
+          </li>
+          <li>
+            <label for="fecha">Fallecimiento</label>
+            <input name="fallecimiento" class="fecha" />
+          </li>
+          <li>
+            <label for="indemnizacion">Tipo:</label>
+            <select name="indemnizacion">
+              <option py:for="i in indemnizaciones" value="${i.id}">${i.nombre}</option>
+            </select>
+          </li>
+          <li><input value="Agregar" type="submit" /></li>
+          </ol>
+        </fieldset>
+      </form>
+      <form action="${tg.url('/seguro/reporte')}">
+        <fieldset>
+          <legend>Mostrar Reporte</legend>
+          <ol>
+            <li>
+              <label for="inicio">Fecha de Inicio</label>
+              <input name="inicio" class="fecha" />
+            </li>
+            <li>
+              <label for="fin">Fecha de Cierre</label>
+              <input name="fin" class="fecha" />
+            </li>
+            <li><input value="Mostrar" type="submit" /></li>
+          </ol>
+        </fieldset>
+      </form>
+    </div>
+    <div id="auxilio">
+      <h1>Auxilio Funebre</h1>
+      <form action="${tg.url('/auxilio/agregar')}" method="post">
+        <fieldset>
+          <legend>Agregar</legend>
+          <ol>
+            <li>
+              <label for="afiliado">Afiliaci&oacute;n:</label>
+              <input name="afiliado" />
+            </li>
+            <li>
+              <label for="fecha">Fecha:</label>
+              <input name="fecha" class="fecha" />
+            </li>
+            <li>
+              <label for="cobrador">Cobrador:</label>
+              <input name="cobrador" />
+            </li>
+            <li>
+              <label for="monto">Monto:</label>
+              <input name="monto" />
+            </li>
+            <li>
+              <label for="cheque">Cheque:</label>
+              <input name="cheque" />
+            </li>
+            <li>
+              <label for="banco">Banco</label>
+              <input name="banco" />
+            </li>
+            <li><input value="Agregar" type="submit" /></li>
+          </ol>
+        </fieldset>
+      </form>
+      <form action="${tg.url('/auxilio/reporte')}">
+        <fieldset>
+          <legend>Mostrar Reporte</legend>
+          <ol>
+            <li>
+              <label for="inicio">Fecha de Inicio</label>
+              <input name="inicio" class="fecha" />
+            </li>
+            <li>
+              <label for="fin">Fecha de Cierre</label>
+              <input name="fin" class="fecha" />
+            </li>
+            <li><input value="Mostrar" type="submit" /></li>
+          </ol>
+        </fieldset>
+      </form>
+    </div>
+    <div id="devolucion">
+      <h1>Devoluciones</h1>
+      <form action="${tg.url('/devolucion/agregar')}" method="post">
+        <fieldset>
+          <legend>Agregar</legend>
+          <ol>
+            <li>
+              <label for="afiliado">Afiliaci&oacute;n:</label>
+              <input name="afiliado" />
+            </li>
+            <li>
+              <label for="fecha">Fecha:</label>
+              <input name="fecha" class="fecha" />
+            </li>
+            <li>
+              <label for="monto">Monto:</label>
+              <input name="monto" />
+            </li>
+            <li>
+              <label for="concepto">Concepto:</label>
+              <input name="concepto" />
+            </li>
+            <li>
+              <label for="cheque">Cheque:</label>
+              <input name="cheque" />
+            </li>
+            <li>
+              <label for="banco">Banco</label>
+              <input name="banco" />
+            </li>
+            <li><input value="Agregar" type="submit" /></li>
+          </ol>
+        </fieldset>
+      </form>
+      <form action="${tg.url('/devolucion/reporte')}">
+        <fieldset>
+          <legend>Mostrar Reporte</legend>
+          <ol>
+            <li>
+              <label for="inicio">Fecha de Inicio</label>
+              <input name="inicio" class="fecha" />
+            </li>
+            <li>
+              <label for="fin">Fecha de Cierre</label>
+              <input name="fin" class="fecha" />
+            </li>
+            <li><input value="Mostrar" type="submit" /></li>
+          </ol>
+        </fieldset>
+      </form>
+    </div>
+    <div id="funebre">
+      <h1>Ayuda Funebre</h1>
+      <form action="${tg.url('/funebre/agregar')}" method="post">
+        <fieldset>
+          <legend>Agregar</legend>
+          <ol>
+            <li>
+              <label for="afiliado">Afiliaci&oacute;n:</label>
+              <input name="afiliado" />
+            </li>
+            <li>
+              <label for="fecha">Fecha:</label>
+              <input name="fecha" class="fecha" />
+            </li>
+            <li>
+              <label for="monto">Monto:</label>
+              <input name="monto" />
+            </li>
+            <li>
+              <label for="pariente">Pariente:</label>
+              <input name="pariente" />
+            </li>
+            <li>
+              <label for="cheque">Cheque:</label>
+              <input name="cheque" />
+            </li>
+            <li>
+              <label for="banco">Banco</label>
+              <input name="banco" />
+            </li>
+            <li><input value="Agregar" type="submit" /></li>
+          </ol>
+        </fieldset>
+      </form>
+      <form action="${tg.url('/funebre/reporte')}">
+        <fieldset>
+          <legend>Mostrar Reporte</legend>
+          <ol>
+            <li>
+              <label for="inicio">Fecha de Inicio</label>
+              <input name="inicio" class="fecha" />
+            </li>
+            <li>
+              <label for="fin">Fecha de Cierre</label>
+              <input name="fin" class="fecha" />
+            </li>
+            <li><input value="Mostrar" type="submit" /></li>
+          </ol>
+        </fieldset>
+      </form>
+    </div>
+  </div>
 </body>
 </html>

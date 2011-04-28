@@ -26,7 +26,7 @@
           <td>${auxilio.fecha.strftime('%d/%m/%Y')}</td>
           <td>${auxilio.cobrador}</td>
           <td>${locale.currency(auxilio.monto, True, True)}</td>
-          <td><a href="${tg.url('/auxilio/eliminar/%s' % auxilio.id)}">Eliminar</a></td>
+          <td><a href="${tg.url('/auxilio/eliminar/{0}'.format(auxilio.id))}">Eliminar</a></td>
         </tr>
       </tbody>
     </table>
@@ -44,10 +44,10 @@
       <tbody>
         <tr py:for="funebre in afiliado.funebres">
           <td>${funebre.cheque}</td>
-          <td>${funebre.pariente}</td>
           <td>${funebre.fecha.strftime('%d/%m/%Y')}</td>
+          <td>${funebre.pariente}</td>
           <td>${locale.currency(funebre.monto, True, True)}</td>
-          <td><a href="${tg.url('/funebre/eliminar/%s' % funebre.id)}">Eliminar</a></td>
+          <td><a href="${tg.url('/funebre/eliminar/{0}'.format(funebre.id))}">Eliminar</a></td>
         </tr>
       </tbody>
     </table>
@@ -68,7 +68,7 @@
           <td>${devolucion.concepto}</td>
           <td>${devolucion.fecha.strftime('%d/%m/%Y')}</td>
           <td>${locale.currency(devolucion.monto, True, True)}</td>
-          <td><a href="${tg.url('/devolucion/eliminar/%s' % devolucion.id)}">Eliminar</a></td>
+          <td><a href="${tg.url('/devolucion/eliminar/{0}'.format(devolucion.id))}">Eliminar</a></td>
         </tr>
       </tbody>
     </table>
@@ -88,7 +88,7 @@
           <td>${sobrevivencia.fecha.strftime('%d/%m/%Y')}</td>
           <td>${locale.currency(sobrevivencia.monto, True, True)}</td>
           <td>
-            <a href="${tg.url('/sobrevivencia/eliminar/%s' % sobrevivencia.id)}">Eliminar</a>
+            <a href="${tg.url('/sobrevivencia/eliminar/{0}'.format(sobrevivencia.id))}">Eliminar</a>
             <a href="${tg.url('/sobrevivencia/{0}'.format(sobrevivencia.id))}">Editar</a>
           </td>
         </tr>
@@ -116,7 +116,7 @@
                 <input value="Mostrar Detalle" type="submit" />
               </fieldset>
             </form>
-            <a href="${tg.url('/seguro/eliminar/%s' % seguro.id)}">Eliminar</a>
+            <a href="${tg.url('/seguro/eliminar/{0}'.format(seguro.id))}">Eliminar</a>
           </td>
         </tr>
       </tbody>

@@ -80,11 +80,19 @@ class Funebre(Entity):
 	pariente = Field(String(20))
 	banco = Field(Unicode(50))
 
+class Indemnizacion(Entity):
+	
+	using_options(tablename='indemnizacion')
+	
+	nombre = Field(Unicode(50))
+	seguros = OneToMany("Seguro")
+
 class Seguro(Entity):
 	
 	using_options(tablename='seguro')
 	
 	afiliado = ManyToOne("Afiliado")
+	indemnizacion = ManyToOne("Indemnizacion")
 	fecha = Field(DateTime, required=True, default=datetime.now)
 	fallecimiento = Field(DateTime, required=True, default=datetime.now)
 	beneficiarios = OneToMany("Beneficiario")
@@ -98,9 +106,9 @@ class Beneficiario(Entity):
 	using_options(tablename='beneficiario')
 	
 	seguro = ManyToOne("Seguro")
-	nombre = Field(String(50), required=True)
+	nombre = Field(Unicode(50), required=True)
 	monto = Field(Currency, required=True)
-	cheque = Field(String(20), required=True)
+	cheque = Field(Unicode(20), required=True)
 	banco = Field(Unicode(50))
 	fecha = Field(DateTime, required=True, default=datetime.now)
 

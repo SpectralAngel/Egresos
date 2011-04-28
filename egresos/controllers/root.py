@@ -48,8 +48,8 @@ class Root(controllers.RootController):
 	@expose(template="egresos.templates.welcome")
 	# @identity.require(identity.in_group("admin"))
 	def index(self):
-		import time
-		return dict(now=time.ctime())
+		
+		return dict(indemnizaciones=model.Indemnizacion.query.all())
 	
 	@error_handler(index)
 	@expose(template="egresos.templates.afiliado")
