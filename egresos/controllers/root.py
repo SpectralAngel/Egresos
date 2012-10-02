@@ -17,72 +17,66 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-import turbogears as tg
-from turbogears 	import controllers, validators
-from turbogears		import expose, validate, error_handler
+from turbogears     import (controllers, validators, expose, validate,
+						error_handler)
 # from egresos import model
-from turbogears 	import identity, redirect
-from cherrypy   	import request, response
-from egresos		import breadcrumbs
-from egresos		import model
-from egresos.controllers.sobrevivencia import Sobrevivencia
-from egresos.controllers.seguro import Seguro
-from egresos.controllers.auxilio import Auxilio
-from egresos.controllers.funebre import Funebre
-from egresos.controllers.devolucion import Devolucion
-from egresos.controllers.filial import Filial
+from turbogears     import identity, redirect
+from cherrypy       import request, response
+from egresos        import breadcrumbs, model
+from egresos.controllers import (sobrevivencia, seguro, auxilio, funebre,
+								devolucion, filial)
 # from egresos import json
 # import logging
 # log = logging.getLogger("egresos.controllers")
 
 class Root(controllers.RootController):
-	
-	sobrevivencia = Sobrevivencia()
-	seguro = Seguro()
-	auxilio = Auxilio()
-	devolucion = Devolucion()
-	funebre = Funebre()
-	filial = Filial()
-	
-	@identity.require(identity.not_anonymous())
-	@expose(template="egresos.templates.welcome")
-	# @identity.require(identity.in_group("admin"))
-	def index(self):
-		
-		return dict(indemnizaciones=model.Indemnizacion.query.all())
-	
-	@error_handler(index)
-	@expose(template="egresos.templates.afiliado")
-	@validate(validators=dict(afiliado=validators.Int()))
-	def afiliado(self, afiliado):
-		
-		return dict(afiliado=model.Afiliado.get(afiliado))
-
-	@expose(template="egresos.templates.login")
-	def login(self, forward_url=None, previous_url=None, *args, **kw):
-
-		if not identity.current.anonymous and identity.was_login_attempted() \
-				and not identity.get_identity_errors():
-			raise redirect(tg.url(forward_url or previous_url or '/', kw))
-
-		forward_url = None
-		previous_url = request.path
-
-		if identity.was_login_attempted():
-			msg = _("The credentials you supplied were not correct or "
-				   "did not grant access to this resource.")
-		elif identity.get_identity_errors():
-			msg = _("You must provide your credentials before accessing "
-				   "this resource.")
-		else:
-			msg = _("Please log in.")
-			forward_url = request.headers.get("Referer", "/")
-
-		response.status = 403
-		return dict(message=msg, previous_url=previous_url, logging_in=True,
-			original_parameters=request.params, forward_url=forward_url)
-
-	@expose()
-	def logout(self):
-		identity.current.logout()
-		raise redirect("/")
+    
+    sobrevivencia = sobrevivencia.Sobrevivencia()
+    seguro = seguro.Seguro()
+    auxilio = auxilio.Auxilio()
+    devolucion = devolucion.Devolucion()
+    funebre = funebre.Funebre()
+    filial = filial.Filial()
+    
+    @identity.require(identity.not_anonymous())
+    @expose(template="turboaffiliate.templates.welcome")
+    def index(self):
+        
+        return dict()
+    
+    @expose(template="turboaffiliate.templates.login")
+    def login(self, forward_url=None, previous_url=None, *args, **kw):
+        if not identity.current.anonymous \
+            and identity.was_login_attempted() \
+            and not identity.get_identity_errors():
+            raise redirect(forward_url)
+        
+        forward_url=None
+        previous_url = url(request.path_info)
+        
+        if identity.was_login_attempted():
+            msg=_("The credentials you supplied were not correct or "
+                "did not grant access to this resource.")
+        elif identity.get_identity_errors():
+            msg=_("You must provide your credentials before accessing "
+                  "this resource.")
+        else:
+            msg=_("Please log in.")
+            forward_url= request.headers.get("Referer", "/")
+        
+        response.status=403
+        return dict(message=msg, previous_url=previous_url, logging_in=True,
+                    original_parameters=request.params,
+                    forward_url=forward_url)
+    
+    @expose()
+    def logout(self):
+        identity.current.logout()
+        raise redirect("/")
+    
+    @error_handler(index)
+    @expose(template="egresos.templates.afiliado")
+    @validate(validators=dict(afiliado=validators.Int()))
+    def afiliado(self, afiliado):
+        
+        return dict(afiliado=model.Afiliado.get(afiliado))
