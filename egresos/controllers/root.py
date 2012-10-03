@@ -18,13 +18,13 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 from turbogears     import (controllers, validators, expose, validate,
-						error_handler)
+                        error_handler)
 # from egresos import model
 from turbogears     import identity, redirect
 from cherrypy       import request, response
 from egresos        import breadcrumbs, model
 from egresos.controllers import (sobrevivencia, seguro, auxilio, funebre,
-								devolucion, filial)
+                                devolucion, filial)
 # from egresos import json
 # import logging
 # log = logging.getLogger("egresos.controllers")

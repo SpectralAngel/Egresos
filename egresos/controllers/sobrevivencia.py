@@ -103,4 +103,6 @@ class Sobrevivencia(controllers.Controller, identity.SecureResource):
         
         sobrevivencias = model.Sobrevivencia.query.all()
         
-        return dict(sobrevivencias=[s for s in sobrevivencias if s.fecha >= inicio or s.fecha >= fin], inicio=inicio, fin=fin)
+        return dict(sobrevivencias=
+            [s for s in sobrevivencias if s.fecha >= inicio or s.fecha >= fin],
+            inicio=inicio, fin=fin)

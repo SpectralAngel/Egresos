@@ -1,5 +1,5 @@
-#Thu Feb 18 09:56:52 CST 2010
 eclipse.preferences.version=1
+encoding//egresos/commands.py=utf8
 encoding//egresos/controllers/auxilio.py=utf8
 encoding//egresos/controllers/devolucion.py=utf8
 encoding//egresos/controllers/filial.py=utf8

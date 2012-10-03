@@ -45,7 +45,7 @@ class PagoFilial(controllers.Controller, identity.SecureResource):
         pago.filial = filial
         pago.flush()
         
-        raise redirect('/filial/%s' % filial.id)
+        raise redirect('/filial/{0}'.format(filial.id))
     
     @expose()
     @validate(validators=dict(pago=validators.Int()))
@@ -55,7 +55,7 @@ class PagoFilial(controllers.Controller, identity.SecureResource):
         filial = pago.filial
         pago.delete()
         
-        raise redirect('/filial/%s' % filial.id)
+        raise redirect('/filial/{0}'.format(filial.id))
 
 class Filial(controllers.Controller, identity.SecureResource):
     
@@ -82,7 +82,8 @@ class Filial(controllers.Controller, identity.SecureResource):
         return self.default(filial)
     
     @expose()
-    @validate(validators=dict(departamento=validators.Int(), instituto=validators.UnicodeString()))
+    @validate(validators=dict(departamento=validators.Int(),
+                              instituto=validators.UnicodeString()))
     def agregar(self, departamento, **kw):
         
         departamento = model.Departamento.get(departamento)
@@ -91,4 +92,4 @@ class Filial(controllers.Controller, identity.SecureResource):
         filial.departamento = departamento
         filial.flush()
         
-        raise redirect('/filial/%s' % filial.id)
+        raise redirect('/filial/{0}'.format(filial.id))

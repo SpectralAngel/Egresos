@@ -20,10 +20,10 @@ import locale
 locale.setlocale(locale.LC_ALL, locale_name)
 
 turbogears.update_config(configfile="dev.cfg", modulename="egresos.config")
-turbogears.config.update({'global': {'server.webpath': '/egresos',
+turbogears.config.update({'global': {'server.webpath': '/egresos/',
                                      'engine.start': False}})
 
-from egresos import command
+from egresos import commands
 
 print(turbogears.config.get("server.webpath"))
-application = command.start()
+application = commands.start()
