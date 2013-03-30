@@ -98,7 +98,7 @@ def bootstrap():
     
     You can adapt this to your needs to e.g. accept more options or to
     run more functions for bootstrapping other parts of your application.
-    By default this runs the function 'turboaffiliate.model.bootstrap_model', which
+    By default this runs the function 'egresos.model.bootstrap_model', which
     creates all database tables and optionally adds a user.
     
     The following line in your project's 'setup.py' file takes care of
@@ -130,3 +130,4 @@ def start():
 
     from egresos.controllers import root
     return turbogears.start_server(root.Root())
+

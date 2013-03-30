@@ -20,7 +20,7 @@
 from turbogears     import (controllers, validators, expose, validate,
                         error_handler)
 # from egresos import model
-from turbogears     import identity, redirect
+from turbogears     import identity, redirect, url
 from cherrypy       import request, response
 from egresos        import breadcrumbs, model
 from egresos.controllers import (sobrevivencia, seguro, auxilio, funebre,
@@ -39,12 +39,12 @@ class Root(controllers.RootController):
     filial = filial.Filial()
     
     @identity.require(identity.not_anonymous())
-    @expose(template="turboaffiliate.templates.welcome")
+    @expose(template="egresos.templates.welcome")
     def index(self):
         
-        return dict()
+        return dict(indemnizaciones=list())
     
-    @expose(template="turboaffiliate.templates.login")
+    @expose(template="egresos.templates.login")
     def login(self, forward_url=None, previous_url=None, *args, **kw):
         if not identity.current.anonymous \
             and identity.was_login_attempted() \
@@ -80,3 +80,4 @@ class Root(controllers.RootController):
     def afiliado(self, afiliado):
         
         return dict(afiliado=model.Afiliado.get(afiliado))
+

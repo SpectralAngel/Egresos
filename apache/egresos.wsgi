@@ -27,3 +27,4 @@ from egresos import commands
 
 print(turbogears.config.get("server.webpath"))
 application = commands.start()
+

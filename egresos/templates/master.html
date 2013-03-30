@@ -44,11 +44,6 @@
 			</div>
 		</form>
 	</div>
-	<div id="breadcrumb">
-		<span py:for="url, name in tg.breadcrumbs()">
-			&bull; <a class="menu" py:content="name" href="${url}" />
-		</span>
-	</div>
 	<div class="flash" py:if="tg_flash" py:content="tg_flash" />
 	<div id="main_content">
 		<div py:for="js in tg_js_bodytop" py:replace="ET(js.display())" />
