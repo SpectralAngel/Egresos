@@ -19,17 +19,17 @@
 
 """This module contains functions to be called from console script entry points.
 """
+import sys
+import optparse
+from os import getcwd
+from os.path import dirname, exists, join
+import pkg_resources
+import cherrypy
+import turbogears
 
 # symbols which are imported by "from turboaffiliate.command import *"
 __all__ = ['bootstrap', 'ConfigurationError', 'start']
 
-import sys
-import optparse
-
-from os import getcwd
-from os.path import dirname, exists, join
-
-import pkg_resources
 try:
     pkg_resources.require("TurboGears>=1.5")
 except pkg_resources.DistributionNotFound:
@@ -43,19 +43,19 @@ are stuck, visit http://docs.turbogears.org/GettingHelp for support options.""")
     sys.exit(1)
 try:
     pkg_resources.require("SQLAlchemy>=0.6.0")
-    pkg_resources.require("Elixir>=0.7.0")
+    pkg_resources.require("Elixir")
 except pkg_resources.DistributionNotFound:
     from turbogears.util import missing_dependency_error
+
     print missing_dependency_error('SQLAlchemy')
     sys.exit(1)
 
-import cherrypy
-import turbogears
-
 cherrypy.lowercase_api = True
+
 
 class ConfigurationError(Exception):
     pass
+
 
 def _read_config(args):
     """Read deployment configuration file.
@@ -76,7 +76,7 @@ def _read_config(args):
     """
     setupdir = dirname(dirname(__file__))
     curdir = getcwd()
-    
+
     if args:
         configfile = args[0]
     elif exists(join(setupdir, "setup.py")):
@@ -86,12 +86,14 @@ def _read_config(args):
     else:
         try:
             configfile = pkg_resources.resource_filename(
-              pkg_resources.Requirement.parse("recibos"), "config/default.cfg")
+                pkg_resources.Requirement.parse("recibos"),
+                "config/default.cfg")
         except pkg_resources.DistributionNotFound:
             raise ConfigurationError("Could not find default configuration.")
 
     turbogears.update_config(configfile=configfile,
-        modulename="egresos.config")
+                             modulename="egresos.config")
+
 
 def bootstrap():
     """Example function for loading bootstrap data into the database
@@ -108,14 +110,14 @@ def bootstrap():
         'bootstrap-recibos = egresos.command:bootstrap',
     
     """
-    
+
     optparser = optparse.OptionParser(usage="%prog [options] [config-file]",
-        description="Load bootstrap data into the database defined in "
-        "config-file.", version="1.0")
+                                      description="Load bootstrap data into the database defined in "
+                                                  "config-file.", version="1.0")
     optparser.add_option('-C', '--clean', dest="clean", action="store_true",
-        help="Purge all data in the database before loading the bootrap data.")
+                         help="Purge all data in the database before loading the bootrap data.")
     optparser.add_option('-u', '--user', dest="user", metavar="USERNAME",
-        help="Create a default user USERNAME (prompts for password).")
+                         help="Create a default user USERNAME (prompts for password).")
     options, args = optparser.parse_args()
     if options.user:
         options.user = options.user.decode(sys.getfilesystemencoding())
@@ -123,11 +125,11 @@ def bootstrap():
     # from turboaffiliate.model import bootstrap_model
     # bootstrap_model(options.clean, options.user)
 
+
 def start():
     """Start the CherryPy application server."""
-    
+
     _read_config(sys.argv[1:])
 
     from egresos.controllers import root
     return turbogears.start_server(root.Root())
-

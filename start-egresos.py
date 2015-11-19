@@ -7,9 +7,10 @@ directory. When the project is installed, easy_install will create a
 proper start script.
 """
 import locale
-locale.setlocale(locale.LC_ALL, "")
 import sys
 from egresos.commands import start, ConfigurationError
+
+locale.setlocale(locale.LC_ALL, "")
 
 if __name__ == "__main__":
     try:
@@ -17,4 +18,3 @@ if __name__ == "__main__":
     except ConfigurationError, exc:
         sys.stderr.write(str(exc))
         sys.exit(1)
-
