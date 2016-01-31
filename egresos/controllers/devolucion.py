@@ -51,7 +51,7 @@ class Devolucion(controllers.Controller, identity.SecureResource):
                               concepto=validators.UnicodeString(),
                               monto=validators.UnicodeString(),
                               fecha=validators.DateTimeConverter(
-                                  format='%d/%m/%Y'),
+                                      format='%d/%m/%Y'),
                               cheque=validators.UnicodeString(),
                               banco=validators.UnicodeString()))
     def agregar(self, afiliado, **kw):
@@ -81,11 +81,13 @@ class Devolucion(controllers.Controller, identity.SecureResource):
     @error_handler(index)
     @expose(template="egresos.templates.devolucion.reporte")
     @validate(
-        validators=dict(inicio=validators.DateTimeConverter(format='%d/%m/%Y'),
-                        fin=validators.DateTimeConverter(format='%d/%m/%Y')))
+            validators=dict(
+                    inicio=validators.DateTimeConverter(format='%d/%m/%Y'),
+                    fin=validators.DateTimeConverter(format='%d/%m/%Y')))
     def reporte(self, inicio, fin):
-        devoluciones = model.Devolucion.query.filter_by(
-            model.Devolucion.fecha >= inicio).filter_by(
-            model.Devolucion.fecha <= fin).all()
+        devoluciones = model.Devolucion.query.filter(
+                model.Devolucion.fecha >= inicio,
+                model.Devolucion.fecha <= fin
+        ).all()
 
         return dict(devoluciones=devoluciones, inicio=inicio, fin=fin)

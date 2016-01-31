@@ -85,7 +85,6 @@ class Auxilio(controllers.Controller, identity.SecureResource):
                         fin=validators.DateTimeConverter(format='%d/%m/%Y')))
     def reporte(self, inicio, fin):
         auxilios = model.Auxilio.query.filter(
-            model.Auxilio.dia >= inicio).filter(
-            model.Auxilio.dia <= fin).all()
+            model.Auxilio.fecha >= inicio, model.Auxilio.fecha <= fin).all()
 
         return dict(auxilios=auxilios, inicio=inicio, fin=fin)

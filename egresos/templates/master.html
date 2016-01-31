@@ -13,6 +13,9 @@
     locale.setlocale(locale.LC_ALL, locale_name)
 ?>
 <head py:match="head" py:attrs="select('@*')">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<script type="text/javascript" src="${tg.url('/static/javascript/jquery.js')}"></script>
 	<script type="text/javascript" src="${tg.url('/static/javascript/jquery-ui.js')}"></script>
 	<link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/static/css/style.css')}" />
@@ -58,7 +61,7 @@
 		<div py:replace="select('*|text()')" />
 		<div py:for="js in tg_js_bodybottom" py:replace="ET(js.display())" />
 	</div>
-	<div id="footer"><p class="copyright">Copyright 2008 -2010 Carlos Flores</p></div>
+	<div id="footer"><p class="copyright">Copyright 2008 -2016 Carlos Flores</p></div>
 </body>
 
 </html>

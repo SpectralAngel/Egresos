@@ -20,7 +20,7 @@ from datetime import datetime, date
 from elixir import Entity, Field, OneToMany, ManyToOne, ManyToMany
 from elixir import options_defaults, using_options, setup_all
 from elixir import Integer, Boolean, Numeric
-from elixir import String, Unicode, Text
+from elixir import Unicode, Text
 from elixir import DateTime, Date
 from turbogears import identity
 
@@ -41,7 +41,7 @@ class Afiliado(Entity):
     nombre = Field(Unicode(50), colname='first_name')
     apellidos = Field(Unicode(50), colname='last_name')
 
-    cotizacion = Field(String(20), colname='payment')
+    cotizacion = Field(Unicode(20), colname='payment')
     auxilios = OneToMany("Auxilio")
     sobrevivencias = OneToMany("Sobrevivencia")
     funebres = OneToMany("Funebre")
@@ -53,10 +53,10 @@ class Auxilio(Entity):
     using_options(tablename='auxilio')
 
     afiliado = ManyToOne("Afiliado")
-    cobrador = Field(String(100))
+    cobrador = Field(Unicode(100))
     fecha = Field(DateTime, required=True, default=datetime.now)
     monto = Field(Currency, required=True)
-    cheque = Field(String(20))
+    cheque = Field(Unicode(20))
     banco = Field(Unicode(50))
 
 
@@ -66,7 +66,7 @@ class Sobrevivencia(Entity):
     afiliado = ManyToOne("Afiliado")
     fecha = Field(DateTime, required=True, default=datetime.now)
     monto = Field(Currency, required=True)
-    cheque = Field(String(20))
+    cheque = Field(Unicode(20))
     banco = Field(Unicode(50))
 
 
@@ -76,8 +76,8 @@ class Funebre(Entity):
     afiliado = ManyToOne("Afiliado")
     fecha = Field(DateTime, required=True, default=datetime.now)
     monto = Field(Currency, required=True)
-    cheque = Field(String(20))
-    pariente = Field(String(20))
+    cheque = Field(Unicode(20))
+    pariente = Field(Unicode(20))
     banco = Field(Unicode(50))
 
 
@@ -119,7 +119,7 @@ class Devolucion(Entity):
     concepto = Field(Text)
     fecha = Field(DateTime, required=True, default=datetime.now)
     monto = Field(Currency, required=True)
-    cheque = Field(String(20))
+    cheque = Field(Unicode(20))
     banco = Field(Unicode(50))
 
 
@@ -161,7 +161,7 @@ class Visit(Entity):
     """
     using_options(tablename='visit')
 
-    visit_key = Field(String(40), primary_key=True)
+    visit_key = Field(Unicode(40), primary_key=True)
     created = Field(DateTime, nullable=False, default=datetime.now)
     expiry = Field(DateTime)
 
@@ -177,7 +177,7 @@ class VisitIdentity(Entity):
     """
     using_options(tablename='visit_identity')
 
-    visit_key = Field(String(40), primary_key=True)
+    visit_key = Field(Unicode(40), primary_key=True)
     user = ManyToOne('User', colname='user_id', use_alter=True)
 
 
