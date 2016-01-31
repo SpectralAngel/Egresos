@@ -49,12 +49,12 @@ class Funebre(controllers.Controller, identity.SecureResource):
     @error_handler(index)
     @expose()
     @validate(validators=dict(afiliado=validators.Int(),
-                              pariente=validators.String(),
-                              monto=validators.String(),
+                              pariente=validators.UnicodeString(),
+                              monto=validators.UnicodeString(),
                               fecha=validators.DateTimeConverter(
                                   format='%d/%m/%Y'),
-                              cheque=validators.String(),
-                              banco=validators.String()))
+                              cheque=validators.UnicodeString(),
+                              banco=validators.UnicodeString()))
     def agregar(self, afiliado, **kw):
         afiliado = model.Afiliado.get(afiliado)
         kw['monto'] = Decimal(kw['monto'].replace(',', ''))

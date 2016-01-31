@@ -37,10 +37,13 @@ class Beneficiario(controllers.Controller, identity.SecureResource):
     @error_handler(index)
     @expose()
     @validate(
-        validators=dict(seguro=validators.Int(), nombre=validators.String(),
-                        cheque=validators.String(), monto=validators.String(),
-                        banco=validators.String(),
-                        fecha=validators.DateTimeConverter(format='%d/%m/%Y')))
+            validators=dict(seguro=validators.Int(),
+                            nombre=validators.UnicodeString(),
+                            cheque=validators.UnicodeString(),
+                            monto=validators.UnicodeString(),
+                            banco=validators.UnicodeString(),
+                            fecha=validators.DateTimeConverter(
+                                    format='%d/%m/%Y')))
     def agregar(self, seguro, **kw):
         seguro = model.Seguro.get(seguro)
         kw['monto'] = Decimal(kw['monto'].replace(',', ''))
@@ -89,9 +92,9 @@ class Seguro(controllers.Controller):
     @validate(validators=dict(afiliado=validators.Int(),
                               indemnizacion=validators.Int(),
                               fecha=validators.DateTimeConverter(
-                                  format='%d/%m/%Y'),
+                                      format='%d/%m/%Y'),
                               fallecimiento=validators.DateTimeConverter(
-                                  format='%d/%m/%Y')))
+                                      format='%d/%m/%Y')))
     def agregar(self, afiliado, indemnizacion, **kw):
         afiliado = model.Afiliado.get(afiliado)
         indemnizacion = model.Indemnizacion.get(indemnizacion)
@@ -102,7 +105,7 @@ class Seguro(controllers.Controller):
         seguro.flush()
 
         flash(u'Se ha agregado el Seguro de Vida al afiliado {0}'.format(
-            afiliado.id))
+                afiliado.id))
 
         raise redirect('/seguro/{0}'.format(seguro.id))
 
@@ -115,18 +118,19 @@ class Seguro(controllers.Controller):
         seguro.delete()
 
         flash(u'Se ha eliminado el Seguro de Vida al afiliado {0}'.format(
-            afiliado.id))
+                afiliado.id))
 
         raise redirect('/')
 
     @error_handler(index)
     @expose(template="egresos.templates.seguro.reporte")
     @validate(
-        validators=dict(inicio=validators.DateTimeConverter(format='%d/%m/%Y'),
-                        fin=validators.DateTimeConverter(format='%d/%m/%Y')))
+            validators=dict(
+                    inicio=validators.DateTimeConverter(format='%d/%m/%Y'),
+                    fin=validators.DateTimeConverter(format='%d/%m/%Y')))
     def reporte(self, inicio, fin):
         seguros = model.Seguro.query.filter(
-            model.Seguro.fecha >= inicio).filter(
-            model.Seguro.fecha <= fin).all()
+                model.Seguro.fecha >= inicio).filter(
+                model.Seguro.fecha <= fin).all()
 
         return dict(seguros=seguros, inicio=inicio, fin=fin)

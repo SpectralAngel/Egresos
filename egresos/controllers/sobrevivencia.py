@@ -73,7 +73,7 @@ class Sobrevivencia(controllers.Controller, identity.SecureResource):
 
     @expose()
     @validate(validators=dict(sobrevivencia=validators.Int(),
-                              monto=validators.String(),
+                              monto=validators.UnicodeString(),
                               fecha=validators.DateTimeConverter(
                                   format='%d/%m/%Y'),
                               cheque=validators.UnicodeString(),

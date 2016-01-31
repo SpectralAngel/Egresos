@@ -49,8 +49,8 @@ class Auxilio(controllers.Controller, identity.SecureResource):
     @error_handler(index)
     @expose()
     @validate(validators=dict(afiliado=validators.Int(),
-                              cobrador=validators.String(),
-                              monto=validators.String(),
+                              cobrador=validators.UnicodeString(),
+                              monto=validators.UnicodeString(),
                               fecha=validators.DateTimeConverter(
                                   format='%d/%m/%Y'),
                               cheque=validators.String(),

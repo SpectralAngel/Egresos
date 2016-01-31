@@ -15,14 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-
+from __future__ import unicode_literals
 from datetime import datetime, date
-from elixir import Entity, Field, OneToMany, ManyToOne, ManyToMany
-from elixir import options_defaults, using_options, setup_all
-from elixir import Integer, Boolean, Numeric
-from elixir import Unicode, Text
+
 from elixir import DateTime, Date
-from turbogears import identity
+from elixir import Entity, Field, OneToMany, ManyToOne, ManyToMany
+from elixir import Integer, Numeric, Unicode, Text, options_defaults, \
+    using_options, setup_all
 
 Currency = Numeric
 
