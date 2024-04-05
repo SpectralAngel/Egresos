@@ -21,34 +21,19 @@
 """
 import sys
 import optparse
-from os import getcwd
+from os import getcwd, getenv
 from os.path import dirname, exists, join
-import pkg_resources
+
+from dotenv import load_dotenv
+
 import cherrypy
 import turbogears
+import turbogears.config
+from turbogears.config import config_obj
 
-# symbols which are imported by "from turboaffiliate.command import *"
+# symbols which are imported by "from egresos.command import *"
 __all__ = ['bootstrap', 'ConfigurationError', 'start']
 
-try:
-    pkg_resources.require("TurboGears>=1.5")
-except pkg_resources.DistributionNotFound:
-    print("""\
-This is a TurboGears (http://www.turbogears.org) application. It seems that
-you either don't have TurboGears installed or it can not be found.
-
-Please check if your PYTHONPATH is set correctly. To install TurboGears, go to
-http://docs.turbogears.org/Install and follow the instructions there. If you
-are stuck, visit http://docs.turbogears.org/GettingHelp for support options.""")
-    sys.exit(1)
-try:
-    pkg_resources.require("SQLAlchemy>=0.6.0")
-    pkg_resources.require("Elixir")
-except pkg_resources.DistributionNotFound:
-    from turbogears.util import missing_dependency_error
-
-    print missing_dependency_error('SQLAlchemy')
-    sys.exit(1)
 
 cherrypy.lowercase_api = True
 
@@ -83,16 +68,24 @@ def _read_config(args):
         configfile = join(setupdir, "dev.cfg")
     elif exists(join(curdir, "prod.cfg")):
         configfile = join(curdir, "prod.cfg")
-    else:
-        try:
-            configfile = pkg_resources.resource_filename(
-                pkg_resources.Requirement.parse("recibos"),
-                "config/default.cfg")
-        except pkg_resources.DistributionNotFound:
-            raise ConfigurationError("Could not find default configuration.")
+    
+    db_host = getenv('DB_HOST', 'localhost')
+    db_user = getenv('DB_USER')
+    db_password = getenv('DB_PASSWORD')
+    db_name = getenv('DB_NAME')
+    connection_string = "mysql+pymysql://{user}:{password}@{host}/{database}?charset=utf8".format(
+        **{
+            "user": db_user,
+            "host": db_host,
+            "password": db_password,
+            "database": db_name
+        }
+    )
+    print(connection_string)
 
-    turbogears.update_config(configfile=configfile,
-                             modulename="egresos.config")
+    config_data = config_obj(configfile, "egresos.config")
+    config_data['sqlalchemy.dburi'] = connection_string
+    turbogears.config.update(config_data.dict())
 
 
 def bootstrap():
@@ -122,7 +115,7 @@ def bootstrap():
     if options.user:
         options.user = options.user.decode(sys.getfilesystemencoding())
     _read_config(args)
-    # from turboaffiliate.model import bootstrap_model
+    # from egresos.model import bootstrap_model
     # bootstrap_model(options.clean, options.user)
 
 
