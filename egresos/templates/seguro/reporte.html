@@ -1,46 +1,54 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-							"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:py="http://genshi.edgewall.org/"
-	xmlns:xi="http://www.w3.org/2001/XInclude">
-<xi:include href="../master.html" />
-<head>
-	<title></title>
-	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
-</head>
-<body>
-	<div id="sidebar"></div>
-	<div id="getting_started">
-		<h1>Reporte de Egresos por Seguro de Vida</h1>
-		<h2>Del <span py:content="inicio.strftime('%A %d de %B de %Y').decode('cp1252')" />
-		Al <span py:content="fin.strftime('%A %d de %B de %Y').decode('cp1252')" /></h2>
-		<table>
-			<caption>Seguros de Vida Pagados</caption>
-			<thead>
-				<tr>
-					<th>Afiliaci&oacute;n</th>
-					<th>Nombre</th>
-					<th>Entrega</th>
-					<th>Fallecimiento</th>
-					<th>Monto</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr py:for="seguro in seguros">
-					<td py:content="seguro.afiliado.id" />
-					<td py:content="seguro.afiliado.nombre, ' ', seguro.afiliado.apellidos" />
-					<td py:content="seguro.fecha.strftime('%d/%m/%Y')" />
-					<td py:content="seguro.fallecimiento.strftime('%d/%m/%Y')" />
-					<td py:content="locale.currency(seguro.monto(), True, True)" />
-				</tr>
-			</tbody>
-			<tfoot>
-				<tr>
-					<th colspan="4">Total Pagado</th>
-					<th py:content="locale.currency(sum(seguro.monto() for seguro in seguros), True, True)" />
-				</tr>
-			</tfoot>
-		</table>
-	</div>
-</body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:py="http://genshi.edgewall.org/"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+  <xi:include href="../master.html" />
+  <head>
+    <title></title>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+  </head>
+  <body>
+    <div id="sidebar"></div>
+    <div id="getting_started">
+      <h1>Reporte de Egresos por Seguro de Vida</h1>
+      <h2>
+        Del ${inicio.strftime('%A %d de %B de %Y')} Al ${fin.strftime('%A %d de %B de %Y')}
+      </h2>
+      <table>
+        <caption>
+          Seguros de Vida Pagados
+        </caption>
+        <thead>
+          <tr>
+            <th>Afiliaci&oacute;n</th>
+            <th>Nombre</th>
+            <th>Entrega</th>
+            <th>Fallecimiento</th>
+            <th>Monto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr py:for="seguro in seguros">
+            <td py:content="seguro.afiliado.id" />
+            <td
+              py:content="seguro.afiliado.nombre, ' ', seguro.afiliado.apellidos"
+            />
+            <td py:content="seguro.fecha.strftime('%d/%m/%Y')" />
+            <td py:content="seguro.fallecimiento.strftime('%d/%m/%Y')" />
+            <td py:content="locale.currency(seguro.monto(), True, True)" />
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="4">Total Pagado</th>
+            <th
+              py:content="locale.currency(sum(seguro.monto() for seguro in seguros), True, True)"
+            />
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </body>
 </html>
