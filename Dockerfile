@@ -1,16 +1,42 @@
+# Build stage
+FROM ubuntu:22.04 AS builder
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    python2.7 \
+    python2.7-dev \
+    git \
+    wget \
+    curl \
+    build-essential \
+    libffi-dev \
+    libssl-dev \
+    libmysqlclient-dev \
+    && curl https://bootstrap.pypa.io/pip/2.7/get-pip.py | python2.7 - \
+    && wget https://raw.githubusercontent.com/paulfitz/mysql-connector-c/master/include/my_config.h -P /usr/include/mysql/ \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+
+RUN python2.7 -m pip install --no-cache-dir -r requirements.txt
+
+# Final stage
 FROM ubuntu:22.04
 
-# Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
-
-# Keeps Python from buffering stdout and stderr to avoid situations where
-# the application crashes without emitting any logs due to buffering.
 ENV PYTHONUNBUFFERED=1
+ENV DEBIAN_FRONTEND=noninteractive
 
-WORKDIR /app
+RUN apt-get update && apt-get install -y \
+    python2 \
+    language-pack-es \
+    libmysqlclient21 \
+    && rm -rf /var/lib/apt/lists/*
 
-# Create a non-privileged user that the app will run under.
-# See https://docs.docker.com/go/dockerfile-user-best-practices/
+# Create non-privileged user
 ARG UID=10001
 RUN adduser \
     --disabled-password \
@@ -21,33 +47,11 @@ RUN adduser \
     --uid "${UID}" \
     appuser
 
-ENV DEBIAN_FRONTEND noninteractive
+# Copy Python packages from builder
+COPY --from=builder /usr/local/lib/python2.7 /usr/local/lib/python2.7
 
-RUN apt-get update \
-    &&  apt-get install -y \
-    language-pack-es \
-    git \
-    curl \
-    python2 \
-    && curl https://bootstrap.pypa.io/pip/2.7/get-pip.py | python2 - \
-    && rm -rf /var/lib/apt/lists/*
-
-# Download dependencies as a separate step to take advantage of Docker's caching.
-# Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
-# Leverage a bind mount to requirements.txt to avoid having to copy them into
-# into this layer.
-RUN --mount=type=cache,target=/root/.cache/pip \
-    --mount=type=bind,source=requirements.txt,target=requirements.txt \
-    python2 -m pip install -r requirements.txt
-
-# Switch to the non-privileged user to run the application.
-USER appuser
-
-# Copy the source code into the container.
+WORKDIR /app
 COPY . .
 
-# Expose the port that the application listens on.
+USER appuser
 EXPOSE 8000
-
-# Run the application.
-CMD python2 start-egresos.py
