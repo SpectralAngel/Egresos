@@ -55,3 +55,5 @@ COPY . .
 
 USER appuser
 EXPOSE 8000
+
+CMD ["python2", "start-egresos.py"]
