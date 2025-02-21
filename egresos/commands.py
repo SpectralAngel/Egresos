@@ -73,7 +73,7 @@ def _read_config(args):
     db_user = getenv('DB_USER')
     db_password = getenv('DB_PASSWORD')
     db_name = getenv('DB_NAME')
-    connection_string = "mysql+pymysql://{user}:{password}@{host}/{database}?charset=utf8".format(
+    connection_string = "mysql://{user}:{password}@{host}/{database}?charset=utf8".format(
         **{
             "user": db_user,
             "host": db_host,
